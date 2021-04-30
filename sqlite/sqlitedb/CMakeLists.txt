@@ -38,6 +38,9 @@ set(PROJECT_SOURCES
         user_main.cpp
         user_main.h
         user_main.ui
+        operator.cpp
+        operator.h
+        operator.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
