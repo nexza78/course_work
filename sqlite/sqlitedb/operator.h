@@ -2,21 +2,29 @@
 #define OPERATOR_H
 
 #include <QMainWindow>
+#include<QtSql>
+#include<QDebug>
+#include<QMessageBox>
 
 namespace Ui {
-class operator;
+class Operator;
 }
 
-class operator : public QMainWindow
+class Operator : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit operator(QWidget *parent = nullptr);
-    ~operator();
+    explicit Operator(QWidget *parent = nullptr);
+    explicit Operator(QString login, QWidget *parent = nullptr):cur_login(login){};
+    ~Operator();
+
+private slots:
+    void on_pB_save_info_clicked();
 
 private:
-    Ui::operator *ui;
+    Ui::Operator *ui;
+    QString cur_login = "";
 };
 
 #endif // OPERATOR_H

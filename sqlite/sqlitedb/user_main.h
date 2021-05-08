@@ -4,19 +4,22 @@
 #include <QMainWindow>
 
 namespace Ui {
-class user_main;
+class User_main;
 }
 
-class user_main : public QMainWindow
+class User_main : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit user_main(QWidget *parent = nullptr);
-    ~user_main();
+    explicit User_main(QWidget *parent = nullptr);
+    ~User_main();
+
+private slots:
+    void on_pB_confirm_register_clicked();
 
 private:
-    Ui::user_main *ui;
+    Ui::User_main *ui;
 };
 
 #endif // USER_MAIN_H

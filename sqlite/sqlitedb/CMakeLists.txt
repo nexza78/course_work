@@ -41,6 +41,8 @@ set(PROJECT_SOURCES
         operator.cpp
         operator.h
         operator.ui
+        db.cpp
+        db.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

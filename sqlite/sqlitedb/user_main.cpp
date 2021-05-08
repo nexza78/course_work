@@ -1,14 +1,20 @@
 #include "user_main.h"
 #include "ui_user_main.h"
 
-user_main::user_main(QWidget *parent) :
+
+User_main::User_main(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::user_main)
+    ui(new Ui::User_main)
 {
     ui->setupUi(this);
 }
 
-user_main::~user_main()
+User_main::~User_main()
 {
     delete ui;
+}
+
+void User_main::on_pB_confirm_register_clicked()
+{
+
 }
