@@ -15,8 +15,8 @@ class Operator : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Operator(QWidget *parent = nullptr);
-    explicit Operator(QString login, QWidget *parent = nullptr):cur_login(login){};
+    //explicit Operator(QWidget *parent = nullptr);
+    explicit Operator(QString login, QWidget *parent = nullptr);
     ~Operator();
 
 private slots:
@@ -24,7 +24,7 @@ private slots:
 
 private:
     Ui::Operator *ui;
-    QString cur_login = "";
+    QString cur_login;
 };
 
 #endif // OPERATOR_H

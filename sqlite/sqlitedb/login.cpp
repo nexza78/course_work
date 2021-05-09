@@ -53,12 +53,12 @@ void Login::on_pushButton_signIn_clicked()
         if(count_rows != 0){
             qDebug() << "is logged in";
             if(ind){
-                operatr = new Operator(login, this);
+                operatr = new Operator(login);
                 operatr->show();
                 this->close();
             }
             else{
-                userMain = new User_main();
+                userMain = new User_main(login);
                 userMain->show();
                 this->close();
             }

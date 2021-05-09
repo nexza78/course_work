@@ -1,11 +1,16 @@
 #include "operator.h"
 #include "ui_operator.h"
 
-Operator::Operator(QWidget *parent) :
+Operator::Operator(QString login, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Operator)
+    ui(new Ui::Operator),
+    cur_login(login)
 {
     ui->setupUi(this);
+
+    QSqlQueryModel *cur_orders = new QSqlQueryModel();
+    cur_orders->setQuery("select * from orders");
+    ui->tableView_cur_orders->setModel(cur_orders);
 }
 
 Operator::~Operator()
@@ -53,12 +58,17 @@ void Operator::on_pB_save_info_clicked()
     }
 
     QSqlQuery query;
-    query.prepare("update Users set login = :login, password = :pswd, First_name =:name, Last_name =:surname, Middle_name = :m_name where login = :cur_log");
+    query.prepare("update Users set password = :pswd, First_name =:name, Last_name =:surname, Middle_name = :m_name where login = :cur_log");
 
     query.bindValue(":login", login);
     query.bindValue(":pswd", passwd);
-    query.bindValue("name", name);
-    query.bindValue("surname", surname);
-    query.bindValue("m_name", middle_name);
+    query.bindValue(":name", name);
+    query.bindValue(":surname", surname);
+    query.bindValue(":m_name", middle_name);
 
+    qDebug() << cur_login;
+
+    if(!query.exec()){
+        qDebug() << "invalid query to change info";
+    }
 }
