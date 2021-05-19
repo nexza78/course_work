@@ -35,7 +35,15 @@ Admin::Admin(QString login, QWidget *parent) :
 
     update_cur_size();
 
+    QSqlQuery id_order;
+    id_order.prepare("select ID_order from Orders where status <> :end_status");
+    id_order.bindValue(":end_status", "завершено");
 
+    id_order.exec();
+
+    while(id_order.next()){
+       ui->comboBox_ID->addItem(id_order.value(0).toString());
+    }
     //
     //query_routes.bindValue(":prod_type", )
 }
@@ -277,4 +285,19 @@ void Admin::add_items_combobox_route_number(){
     }
 }
 
+//void Admin::show_orders(QSqlQueryModel *model, QString table_type){
+//    QSqlQuery query_orders;
+//
+//
+//    QSqlQuery id_order;
+//    id_order.prepare("select ID_order from Orders where status <> :end_status");
+//    id_order.bindValue(":end_status", "завершено");
+//
+//    if(table_type == "cur_orders"){
+//        query_orders.prepare
+//}
 
+void Admin::on_pushButton_save_orders_clicked()
+{
+
+}

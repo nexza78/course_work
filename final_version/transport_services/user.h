@@ -24,11 +24,13 @@ private slots:
     void on_pB_save_info_clicked();
 
     void on_pB_save_new_order_clicked();
+    void update_order_tables();
 
 private:
     Ui::User *ui;
     QString cur_login = "";
-    void show_orders(QSqlQueryModel *model, QString table_type);
+    void show_orders(QSqlQueryModel *orders_tables, QString table_type);
+    QSqlQueryModel *cur_orders_model = nullptr;
 };
 
 #endif // USER_H

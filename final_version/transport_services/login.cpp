@@ -10,7 +10,7 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("sqlitedb.db");
+    mydb.setDatabaseName("E:/course_work/final_version/transport_services/sqlitedb.db");
 
     if(!mydb.open()){
         ui->label->setText("Ошибка при соединении с базой данных!");

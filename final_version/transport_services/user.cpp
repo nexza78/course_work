@@ -26,14 +26,12 @@ User::User(QString login, QWidget *parent) :
 
     qDebug() << query_saved_info.value(0).toString() << "set text";
 
-    QSqlQueryModel *cur_orders = new QSqlQueryModel();
-    show_orders(cur_orders, "cur_orders");
-    ui->tableView_cur_orders->setModel(cur_orders);
+    cur_orders_model = new QSqlQueryModel();
+    show_orders(cur_orders_model, "cur_orders");
 
+    QSqlQueryModel *archive_model = new QSqlQueryModel();
+    show_orders(archive_model, "archive_orders");
 
-    QSqlQueryModel *archive_orders = new QSqlQueryModel();
-    show_orders(archive_orders, "archive_orders");
-    ui->tableView_archive->setModel(archive_orders);
 
     //заполнение комбобоксов
     QStringList types_product;
@@ -137,7 +135,10 @@ void User::on_pushButton_change_acc_clicked()
 }
 
 
-void User::show_orders(QSqlQueryModel *model, QString table_type){
+void User::show_orders(QSqlQueryModel *orders_tables, QString table_type){
+
+    //QSqlQueryModel *orders_tables = new QSqlQueryModel();
+
     QSqlQuery query_orders;
     if(table_type == "cur_orders"){
         query_orders.prepare("select Products.product_type, Products.type_transport, Products.route_number, "
@@ -152,18 +153,25 @@ void User::show_orders(QSqlQueryModel *model, QString table_type){
     query_orders.bindValue(":login", cur_login);
     query_orders.bindValue(":end_status", "завершено");
     qDebug() << query_orders.exec();
-    model->setQuery(query_orders);
+    orders_tables->setQuery(query_orders);
 
-    model->setHeaderData(0, Qt::Horizontal, "Тип продукта");
-    model->setHeaderData(1, Qt::Horizontal, "Тип транспорта");
-    model->setHeaderData(2, Qt::Horizontal, "Номер маршрута");
-    model->setHeaderData(3, Qt::Horizontal, "Ширина");
-    model->setHeaderData(4, Qt::Horizontal, "Высота");
-    model->setHeaderData(5, Qt::Horizontal, "Толщина");
-    model->setHeaderData(6, Qt::Horizontal, "Цена");
-    model->setHeaderData(7, Qt::Horizontal, "Статус");
-    model->setHeaderData(8, Qt::Horizontal, "Срок сдачи");
-    model->setHeaderData(9, Qt::Horizontal, "Количество");
+    orders_tables->setHeaderData(0, Qt::Horizontal, "Тип продукта");
+    orders_tables->setHeaderData(1, Qt::Horizontal, "Тип транспорта");
+    orders_tables->setHeaderData(2, Qt::Horizontal, "Номер маршрута");
+    orders_tables->setHeaderData(3, Qt::Horizontal, "Ширина");
+    orders_tables->setHeaderData(4, Qt::Horizontal, "Высота");
+    orders_tables->setHeaderData(5, Qt::Horizontal, "Толщина");
+    orders_tables->setHeaderData(6, Qt::Horizontal, "Цена");
+    orders_tables->setHeaderData(7, Qt::Horizontal, "Статус");
+    orders_tables->setHeaderData(8, Qt::Horizontal, "Срок сдачи");
+    orders_tables->setHeaderData(9, Qt::Horizontal, "Количество");
+
+    if(table_type == "cur_orders"){
+        ui->tableView_cur_orders->setModel(orders_tables);
+    }
+    else{
+        ui->tableView_archive->setModel(orders_tables);
+    }
 }
 
 void User::on_pB_save_new_order_clicked()
@@ -208,10 +216,15 @@ void User::on_pB_save_new_order_clicked()
 
       query_new_order.exec();
 
-      connect(ui->tableView_cur_orders, SIGNAL(currentTextChanged(QString)), this, SLOT(update_cur_size()));
+      show_orders( cur_orders_model, "cur_orders");
+      //connect(ui->tableView_cur_orders, SIGNAL(currentTextChanged(QString)), this, );
 
     } else {
       qDebug() << "Yes was *not* clicked";
       return;
     }
+}
+
+void User::update_order_tables(){
+    show_orders( cur_orders_model, "cur_orders");
 }

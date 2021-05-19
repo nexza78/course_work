@@ -26,6 +26,8 @@ private slots:
     void on_pushButton_del_size_clicked();
     void on_pushButton_change_size_clicked();
 
+    void on_pushButton_save_orders_clicked();
+
 private:
     Ui::Admin *ui;
     QString cur_login = "";
@@ -34,6 +36,7 @@ private:
     QString selected_route = "";
     void add_items_combobox_route_number();
     int count_sizes();
+    void show_orders(QSqlQueryModel *orders_tables, QString table_type);
 };
 
 #endif // ADMIN_H
