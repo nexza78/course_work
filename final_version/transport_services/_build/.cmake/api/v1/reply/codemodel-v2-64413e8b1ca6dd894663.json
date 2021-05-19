@@ -1,0 +1,77 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "transport_services",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "transport_services::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-transport_services-Debug-df488c1f6e3f95362b5c.json",
+					"name" : "transport_services",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "transport_services_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-transport_services_autogen-Debug-21bc51b3554549de4cf6.json",
+					"name" : "transport_services_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "transport_services_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-transport_services_autogen_timestamp_deps-Debug-7ba34e706001fa2234b7.json",
+					"name" : "transport_services_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "E:/final_version/transport_services/_build",
+		"source" : "E:/final_version/transport_services"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 1
+	}
+}

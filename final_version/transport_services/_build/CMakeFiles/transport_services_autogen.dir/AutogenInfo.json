@@ -1,0 +1,97 @@
+{
+	"BUILD_DIR" : "E:/final_version/transport_services/_build/transport_services_autogen",
+	"CMAKE_BINARY_DIR" : "E:/final_version/transport_services/_build",
+	"CMAKE_CURRENT_BINARY_DIR" : "E:/final_version/transport_services/_build",
+	"CMAKE_CURRENT_SOURCE_DIR" : "E:/final_version/transport_services",
+	"CMAKE_EXECUTABLE" : "C:/Users/stan_/Downloads/cmake-3.18.2-win64-x64/cmake-3.18.2-win64-x64/bin/cmake.exe",
+	"CMAKE_SOURCE_DIR" : "E:/final_version/transport_services",
+	"DEP_FILE" : "E:/final_version/transport_services/_build/transport_services_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "transport_services_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"E:/final_version/transport_services/admin.h",
+			"MU",
+			"EWIEGA46WW/moc_admin.cpp"
+		],
+		[
+			"E:/final_version/transport_services/login.h",
+			"MU",
+			"EWIEGA46WW/moc_login.cpp"
+		],
+		[
+			"E:/final_version/transport_services/signup.h",
+			"MU",
+			"EWIEGA46WW/moc_signup.cpp"
+		],
+		[
+			"E:/final_version/transport_services/user.h",
+			"MU",
+			"EWIEGA46WW/moc_user.cpp"
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "E:/final_version/transport_services/_build/transport_services_autogen/include",
+	"MOC_COMPILATION_FILE" : "E:/final_version/transport_services/_build/transport_services_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_SQL_LIB", "QT_WIDGETS_LIB" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"E:/final_version/transport_services/_build",
+		"E:/final_version/transport_services",
+		"C:/Qt/5.15.2/mingw81_64/include",
+		"C:/Qt/5.15.2/mingw81_64/include/QtWidgets",
+		"C:/Qt/5.15.2/mingw81_64/include/QtGui",
+		"C:/Qt/5.15.2/mingw81_64/include/QtANGLE",
+		"C:/Qt/5.15.2/mingw81_64/include/QtCore",
+		"C:/Qt/5.15.2/mingw81_64/mkspecs/win32-g++",
+		"C:/Qt/5.15.2/mingw81_64/include/QtSql",
+		"C:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
+		"C:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
+		"C:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/backward",
+		"C:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include",
+		"C:/Qt/Tools/mingw810_64/lib/gcc/x86_64-w64-mingw32/8.1.0/include-fixed",
+		"C:/Qt/Tools/mingw810_64/x86_64-w64-mingw32/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"C:/Qt/Tools/mingw810_64/bin/g++.exe",
+		"-dM",
+		"-E",
+		"-c",
+		"C:/Users/stan_/Downloads/cmake-3.18.2-win64-x64/cmake-3.18.2-win64-x64/share/cmake-3.18/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "E:/final_version/transport_services/_build/transport_services_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "E:/final_version/transport_services/_build/CMakeFiles/transport_services_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Qt/5.15.2/mingw81_64/bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/Qt/5.15.2/mingw81_64/bin/uic.exe",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 15,
+	"SETTINGS_FILE" : "E:/final_version/transport_services/_build/CMakeFiles/transport_services_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[ "E:/final_version/transport_services/admin.cpp", "MU" ],
+		[ "E:/final_version/transport_services/login.cpp", "MU" ],
+		[ "E:/final_version/transport_services/main.cpp", "MU" ],
+		[ "E:/final_version/transport_services/signup.cpp", "MU" ],
+		[ "E:/final_version/transport_services/user.cpp", "MU" ]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}
