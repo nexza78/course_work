@@ -1,9 +1,0 @@
-# ninja log v5
-11	87	6400337131266735	sqlitedb_autogen/timestamp	379edbd0c8b9183f
-0	24	0	CMakeFiles/clean.additional	a446bd8b7e84fd19
-615	3205	6400316622223205	CMakeFiles/sqlitedb.dir/main.cpp.obj	7a2253bb75bbc00a
-87	2044	6400337150802955	CMakeFiles/sqlitedb.dir/sqlitedb_autogen/mocs_compilation.cpp.obj	c3d2d666404a309c
-618	3297	6400316623070935	CMakeFiles/sqlitedb.dir/login.cpp.obj	7c922c093be02372
-2044	2222	6400337152591042	sqlitedb.exe	f8f5d7c71298f17f
-24	29	0	clean	577b940aee94fbd7
-88	1453	6400337144661203	CMakeFiles/sqlitedb.dir/signup.cpp.obj	f3787d2a100f81ef

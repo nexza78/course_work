@@ -1,5 +1,0 @@
-E:/projects_3sem/sqlite/sqlitedb/_build/CMakeFiles/sqlitedb.dir
-E:/projects_3sem/sqlite/sqlitedb/_build/CMakeFiles/edit_cache.dir
-E:/projects_3sem/sqlite/sqlitedb/_build/CMakeFiles/rebuild_cache.dir
-E:/projects_3sem/sqlite/sqlitedb/_build/CMakeFiles/sqlitedb_autogen_timestamp_deps.dir
-E:/projects_3sem/sqlite/sqlitedb/_build/CMakeFiles/sqlitedb_autogen.dir
