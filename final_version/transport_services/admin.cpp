@@ -285,19 +285,78 @@ void Admin::add_items_combobox_route_number(){
     }
 }
 
-//void Admin::show_orders(QSqlQueryModel *model, QString table_type){
-//    QSqlQuery query_orders;
-//
-//
-//    QSqlQuery id_order;
-//    id_order.prepare("select ID_order from Orders where status <> :end_status");
-//    id_order.bindValue(":end_status", "завершено");
-//
-//    if(table_type == "cur_orders"){
-//        query_orders.prepare
-//}
+void Admin::show_orders(QSqlQueryModel *model, QString table_type){
+
+    //QSqlQueryModel *orders_tables = new QSqlQueryModel();
+
+    QSqlQuery query_orders;
+    if(table_type == "cur_orders"){
+        query_orders.prepare("select Products.product_type, Products.type_transport, Products.route_number, "
+                             "Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, "
+                                "Orders.kolvo, Users.First_name, Users.Last_name, Users.Middle_name, Users.phone_number, Users.Email "
+                                "from Orders inner join Products on Products.ID_products = Orders.ID_products join Users on Users.login = Orders.login where Orders.status <> :end_status");
+    }else{
+        query_orders.prepare("select Products.product_type, Products.type_transport, Products.route_number, "
+                             "Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, "
+                                "Orders.kolvo from Orders inner join Products on Products.ID_products = Orders.ID_products where Orders.status = :end_status");
+    }
+
+    query_orders.bindValue(":login", cur_login);
+    query_orders.bindValue(":end_status", "завершено");
+    qDebug() << query_orders.exec() << "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdwdwdwdwdwd";
+    model->setQuery(query_orders);
+
+    model->setHeaderData(0, Qt::Horizontal, "Тип продукта");
+    model->setHeaderData(1, Qt::Horizontal, "Тип транспорта");
+    model->setHeaderData(2, Qt::Horizontal, "Номер маршрута");
+    model->setHeaderData(3, Qt::Horizontal, "Ширина");
+    model->setHeaderData(4, Qt::Horizontal, "Высота");
+    model->setHeaderData(5, Qt::Horizontal, "Толщина");
+    model->setHeaderData(6, Qt::Horizontal, "Цена");
+    model->setHeaderData(7, Qt::Horizontal, "Статус");
+    model->setHeaderData(8, Qt::Horizontal, "Срок сдачи");
+    model->setHeaderData(9, Qt::Horizontal, "Количество");
+
+    if(table_type == "cur_orders"){
+        ui->tableView_cur_orders->setModel(model);
+    }
+    else{
+        ui->tableView_archive->setModel(model);
+    }
+
+    //QSqlQuery query_orders;
+    //
+    //QSqlQuery id_order;
+    //id_order.prepare("select ID_order from Orders where status <> :end_status");
+    //id_order.bindValue(":end_status", "завершено");
+    //
+    //if(table_type == "cur_orders"){
+    //    query_orders.prepare
+}
 
 void Admin::on_pushButton_save_orders_clicked()
 {
+    int Id_order = ui->comboBox_ID->currentData().toInt();
+    int price = ui->spinBox_price->value();
+    QString status = ui->comboBox_set_status->currentText();
+    QDate deadline = ui->dateEdit->date();
+
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Обработка заказа", "Вы уверены, что хотите сохранить данные? ",
+                                    QMessageBox::Yes|QMessageBox::Cancel);
+    if (reply == QMessageBox::Yes) {
+      qDebug() << "Yes";
+
+      QSqlQuery query_add_size;
+      query_add_size.prepare("update Orders set price = :price, status = :status, deadline = :deadline where ID_order = :Id");
+      query_add_size.bindValue(":price", price);
+      query_add_size.bindValue(":status", status);
+      query_add_size.bindValue(":deadline", deadline);
+      query_add_size.bindValue(":Id", Id_order);
+
+      if(!query_add_size.exec()){
+          qDebug()<<":(((((";
+      }
+    }
 
 }

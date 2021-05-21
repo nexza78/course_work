@@ -426,12 +426,20 @@
           <item row="3" column="0">
            <widget class="QLabel" name="label_20">
             <property name="text">
-             <string>Срок сдачи</string>
+             <string>Дата сдачи</string>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QDateEdit" name="dateEdit"/>
+           <widget class="QDateEdit" name="dateEdit">
+            <property name="minimumDate">
+             <date>
+              <year>2020</year>
+              <month>9</month>
+              <day>1</day>
+             </date>
+            </property>
+           </widget>
           </item>
           <item row="5" column="1">
            <widget class="QPushButton" name="pushButton_save_orders">
@@ -441,7 +449,11 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QSpinBox" name="spinBox_price"/>
+           <widget class="QSpinBox" name="spinBox_price">
+            <property name="maximum">
+             <number>100000</number>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>

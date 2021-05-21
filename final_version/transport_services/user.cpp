@@ -137,8 +137,6 @@ void User::on_pushButton_change_acc_clicked()
 
 void User::show_orders(QSqlQueryModel *orders_tables, QString table_type){
 
-    //QSqlQueryModel *orders_tables = new QSqlQueryModel();
-
     QSqlQuery query_orders;
     if(table_type == "cur_orders"){
         query_orders.prepare("select Products.product_type, Products.type_transport, Products.route_number, "
