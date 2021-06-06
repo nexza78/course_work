@@ -28,13 +28,22 @@ private slots:
 
     void on_pushButton_save_orders_clicked();
 
+    void on_pushButton_set_price_clicked();
+
+    void on_pushButton_set_status_clicked();
+
+    void on_pushButton_set_date_clicked();
+
 private:
     Ui::Admin *ui;
     QString cur_login = "";
     QString selected_prod_type = "";
     QString selected_tr_type = "";
     QString selected_route = "";
+    QSqlQueryModel *cur_orders_model = nullptr;
+    QSqlQueryModel *archive_model = nullptr;
     void add_items_combobox_route_number();
+    void add_ID_orders();
     int count_sizes();
     void show_orders(QSqlQueryModel *orders_tables, QString table_type);
 };

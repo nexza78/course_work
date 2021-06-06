@@ -93,7 +93,7 @@ void SignUp::on_pB_confirm_register_clicked()
     query.addBindValue(email);
 
     if(query.exec()){
-            QMessageBox::information(this, "Регистрация", "Вы успешно зарегистированы!");
+            QMessageBox::information(this, "Регистрация", "Вы успешно зарегистрированы!");
             this->close();
     }
 

@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>494</width>
-    <height>575</height>
+    <width>381</width>
+    <height>409</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Login</string>
+   <string>Вход</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>C:/Users/stan_/Downloads/123.png</normaloff>C:/Users/stan_/Downloads/123.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout_3">
@@ -189,7 +193,7 @@
         </property>
         <item>
          <property name="text">
-          <string>пользователь</string>
+          <string>заказчик</string>
          </property>
         </item>
         <item>
@@ -272,7 +276,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>494</width>
+     <width>381</width>
      <height>21</height>
     </rect>
    </property>

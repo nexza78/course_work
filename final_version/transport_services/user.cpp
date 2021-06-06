@@ -84,6 +84,7 @@ void User::on_pB_save_info_clicked()
     QString phone_nmb   = "";
     QString email       = "";
 
+
     passwd = ui->lineE_passwd->text();
     confirm_passwd = ui->lineE_passwd_confirm->text();
     name = ui->lineEdit_name->text();
@@ -91,6 +92,7 @@ void User::on_pB_save_info_clicked()
     middle_name = ui->lineEdit_middle_name->text();
     phone_nmb = ui->lineEdit_phone->text();
     email = ui->lineEdit_email->text();
+    qDebug() << name << ' ' << surname << ' ';
 
     //проверка на корректность - ?
     bool bool_passwd = 0;
@@ -99,25 +101,27 @@ void User::on_pB_save_info_clicked()
     bool_passwd = ui->lineE_passwd->text().isEmpty();
     bool_passwd_confirm = ui->lineE_passwd_confirm->text().isEmpty();
 
+
+    QSqlQuery query;
     if(!bool_passwd || !bool_passwd_confirm){
         if(confirm_passwd != passwd){
             QMessageBox::warning(this, "Ошибка!", "Пароли не совпадают!");
             return;
         }
+        else{
+            query.prepare("update Users set password = :pswd, First_Name =:name, Last_Name =:surname, Middle_name = :m_name, Phone_number =:phone, Email = :email where login = :cur_log");
+            query.bindValue(":pswd", passwd);
+        }
     }
-
-
-    QSqlQuery query;
-    query.prepare("update Users set login = :login, password = :pswd, First_name =:name, Last_name =:surname, Middle_name = :m_name, Phone_number =:phone, Email = :email where login = :cur_log");
-
-    query.bindValue(":login", cur_login);
-    query.bindValue(":pswd", passwd);
+    else{
+        query.prepare("update Users set First_Name =:name, Last_Name =:surname, Middle_name = :m_name, Phone_number =:phone, Email = :email where login = :cur_log");
+    }
     query.bindValue(":name", name);
     query.bindValue(":surname", surname);
     query.bindValue(":m_name", middle_name);
     query.bindValue(":phone", phone_nmb);
     query.bindValue(":email", email);
-
+    query.bindValue(":cur_log", cur_login);
     if(query.exec()){
         QMessageBox::information(this, "Информация о пользователе", "Данные сохранены!");
     }
@@ -149,7 +153,7 @@ void User::show_orders(QSqlQueryModel *orders_tables, QString table_type){
     }
 
     query_orders.bindValue(":login", cur_login);
-    query_orders.bindValue(":end_status", "завершено");
+    query_orders.bindValue(":end_status", "Завершен");
     qDebug() << query_orders.exec();
     orders_tables->setQuery(query_orders);
 
@@ -185,7 +189,7 @@ void User::on_pB_save_new_order_clicked()
     }
 
     QSqlQuery query_match_info;
-    query_match_info.prepare("select ID_products from Products where product_type = :selected_product and type_transport =:selected_transport and route_number = :selected_route_number");
+    query_match_info.prepare("select ID_products from Products where product_type = :selected_product and type_transport =:selected_transport and route_number = :selected_route_number and deleted = 0");
 
     query_match_info.bindValue(":selected_product", selected_product);
     query_match_info.bindValue(":selected_transport", selected_transport);
@@ -197,7 +201,7 @@ void User::on_pB_save_new_order_clicked()
         ID_products = query_match_info.value(0).toInt();
     }
     else{
-        QMessageBox::information(this, "Новый заказ", "Выбранные параметры не поддерживаются.");
+        QMessageBox::information(this, "Новый заказ", "Выбранный тип изделия для этого маршрута не поддерживается.");
         return;
     }
 
@@ -214,7 +218,7 @@ void User::on_pB_save_new_order_clicked()
 
       query_new_order.exec();
 
-      show_orders( cur_orders_model, "cur_orders");
+      show_orders(cur_orders_model, "cur_orders");
       //connect(ui->tableView_cur_orders, SIGNAL(currentTextChanged(QString)), this, );
 
     } else {
