@@ -115,6 +115,11 @@ void Admin::on_pushButton_add_size_clicked()
         return;
     }
 
+    if(thickness != 0 && selected_prod_type != "объемный номер"){
+        QMessageBox::information(this, "Добавление размера", "Указанный размер невозможен для данного изделия.");
+        return;
+    }
+
     if(new_route == ""){
         QMessageBox::information(this, "Добавление размера", "Не указан маршрут.");
         return;
@@ -133,7 +138,6 @@ void Admin::on_pushButton_add_size_clicked()
         if(cur_size.next()){
             count++;
         }
-
         if(count != 0){
             QMessageBox::information(this, "Добавление размера", "Будет изменен существующий размер.");
             query_add_size.prepare("update Products set width = :width, height = :height, thickness = :thickness where product_type = :selected_product and type_transport = :selected_transport and route_number = :route_number");
@@ -143,9 +147,6 @@ void Admin::on_pushButton_add_size_clicked()
 
         }
     }
-    else{
-        qDebug()<<"aaaaa admin query";
-    }
 
 
     QMessageBox::StandardButton reply;
@@ -154,7 +155,6 @@ void Admin::on_pushButton_add_size_clicked()
                                     QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
       qDebug() << "Yes";
-
       query_add_size.bindValue(":selected_product", selected_prod_type);
       query_add_size.bindValue(":selected_transport", selected_tr_type);
       query_add_size.bindValue(":route_number", new_route);
@@ -168,10 +168,6 @@ void Admin::on_pushButton_add_size_clicked()
           update_cur_size();
           return;
       }
-
-      } else {
-      qDebug() << "Yes was not clicked";
-      return;
     }
 }
 
@@ -193,15 +189,11 @@ void Admin::update_cur_size(){
             count++;
         }
 
-        qDebug() << "asddada" << count << selected_route;
         if(count != 0){
             ui->label_cur_size->setText(cur_size.value(0).toString() + " x " + cur_size.value(1).toString() + " x " + cur_size.value(2).toString());
         }else{
             ui->label_cur_size->setText("Размер не существует");
         }
-    }
-    else{
-        qDebug()<<"aaaaa admin query";
     }
 }
 
@@ -236,7 +228,7 @@ void Admin::on_pushButton_change_size_clicked()
 {
     QString cur_size = ui->label_cur_size->text();
     if(cur_size == "..." || cur_size == "Размер не существует"){
-        QMessageBox::information(this, "Изменение размера", "Выбранный размер не существует. Изменение размера доступно после его создания.");
+        QMessageBox::information(this, "Изменение размера", "Выбранный размер не существует. Изменение размера доступно после его добавления.");
         return;
     }
 
@@ -276,7 +268,6 @@ void Admin::on_pushButton_change_size_clicked()
           ID_products = query_match_info.value(0).toInt();
       }
 
-     qDebug() <<  ID_products << selected_prod_type << selected_tr_type << selected_route;
       QSqlQuery query_del_size;
       query_del_size.prepare("update Products set width = :width, height = :height, thickness = :thickness where ID_products = :ID_products");
       query_del_size.bindValue(":width", width);
@@ -288,9 +279,90 @@ void Admin::on_pushButton_change_size_clicked()
           update_cur_size();
       }
 
-      } else {
-      qDebug() << "Yes was not clicked";
-      return;
+      }
+}
+
+void Admin::check_order_conditions(char chosen){
+    QString chosen_param = "";
+
+    if(chosen == 'a'){
+        chosen_param = "Добавление размера";
+    }
+    else{
+        chosen_param = "Изменение размера";
+    }
+
+    QString new_route = ui->lineEdit_new_route->text();
+
+    int width = ui->spinBox_width->value();
+    int height = ui->spinBox_height->value();
+    int thickness = ui->spinBox_thickness->value();
+
+    if(width == 0 || height == 0){
+        QMessageBox::information(this, chosen_param, "Указан неверный размер.");
+        return;
+    }
+
+    if(thickness == 0 && selected_prod_type == "объемный номер"){
+        QMessageBox::information(this, chosen_param, "Указанный размер невозможен для данного изделия.");
+        return;
+    }
+
+    if(thickness != 0 && selected_prod_type != "объемный номер"){
+        QMessageBox::information(this, chosen_param, "Указанный размер невозможен для данного изделия.");
+        return;
+    }
+
+    if(chosen == 'a' && new_route == ""){
+        QMessageBox::information(this, chosen_param, "Не указан маршрут.");
+        return;
+    }
+
+    QSqlQuery cur_size;
+    cur_size.prepare("select * from Products where product_type = :prod_type and type_transport = :tr_type and route_number = :route and deleted = 0");
+    cur_size.bindValue(":prod_type", selected_prod_type);
+    cur_size.bindValue(":tr_type", selected_tr_type);
+    cur_size.bindValue(":route", new_route);
+
+    QSqlQuery query_add_size;
+    if(cur_size.exec()){
+        int count = 0;
+        if(cur_size.next()){
+            count++;
+        }
+        if(count != 0){
+            if(chosen == 'a'){
+                QMessageBox::information(this, chosen_param, "Будет изменен существующий размер.");
+            }
+            query_add_size.prepare("update Products set width = :width, height = :height, thickness = :thickness where product_type = :selected_product and type_transport = :selected_transport and route_number = :route_number");
+        }
+        else{
+            if(chosen != 'a'){
+                QMessageBox::information(this, chosen_param, "Размер не существует, будет доваблен новый размер.");
+            }
+            query_add_size.prepare("insert into Products(product_type, type_transport, route_number, width, height, thickness) values(:selected_product, :selected_transport, :route_number, :width, :height, :thickness)");
+
+        }
+    }
+
+    QMessageBox::StandardButton reply;
+
+    reply = QMessageBox::question(this, chosen_param, "Вы уверены, что хотите сохранить размер? ",
+                                    QMessageBox::Yes|QMessageBox::Cancel);
+    if (reply == QMessageBox::Yes) {
+      qDebug() << "Yes";
+      query_add_size.bindValue(":selected_product", selected_prod_type);
+      query_add_size.bindValue(":selected_transport", selected_tr_type);
+      query_add_size.bindValue(":route_number", new_route);
+      query_add_size.bindValue(":width", width);
+      query_add_size.bindValue(":height", height);
+      query_add_size.bindValue(":thickness", thickness);
+
+      if(query_add_size.exec()){
+          add_items_combobox_route_number();
+          update_cur_size();
+          return;
+      }
     }
 }
 

@@ -46,6 +46,7 @@ private:
     void add_ID_orders();
     int count_sizes();
     void show_orders(QSqlQueryModel *orders_tables, QString table_type);
+    void check_order_conditions(char chosen);
 };
 
 #endif // ADMIN_H
