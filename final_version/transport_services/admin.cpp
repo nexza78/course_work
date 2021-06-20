@@ -143,36 +143,6 @@ Admin::~Admin()
     delete ui;
 }
 
-//void Admin::on_pB_save_info_clicked()
-//{
-//    QString passwd = "";
-//    QString passwd_confirm = "";
-//    QString name = "";
-//    QString surname = "";
-//    QString middle_name = "";
-
-//    passwd = ui->lineE_passwd->text();
-//    name = ui->lineEdit_name->text();
-//    surname = ui->lineE_surname->text();
-//    middle_name = ui->lineEdit_middle_name->text();
-//    passwd_confirm = ui->lineE_passwd_confirm->text();
-
-//    QSqlQuery query;
-//    query.prepare("update Users set password = :pswd, First_name =:name, Last_name =:surname, Middle_name = :m_name where login = :cur_log");
-
-//    query.bindValue(":cur_log", cur_login);
-//    query.bindValue(":pswd", passwd);
-//    query.bindValue(":name", name);
-//    query.bindValue(":surname", surname);
-//    query.bindValue(":m_name", middle_name);
-
-//    qDebug() << cur_login;
-
-//    if(!query.exec()){
-//        qDebug() << "invalid query to change info";
-//    }
-//}
-
 void Admin::on_pushButton_change_acc_clicked()
 {
 
