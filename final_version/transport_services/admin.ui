@@ -22,7 +22,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -65,7 +65,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Фамилия</string>
+             <string>Фамилия*</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -81,7 +81,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Имя</string>
+             <string>Имя*</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -177,7 +177,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Отчество</string>
+             <string>Отчество*</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -280,7 +280,14 @@
         </item>
         <item row="4" column="0" colspan="3">
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0">
+          <item row="0" column="2">
+           <widget class="QPushButton" name="pB_save_info">
+            <property name="text">
+             <string>Сохранить</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
            <spacer name="horizontalSpacer_3">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -293,10 +300,10 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="pB_save_info">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
             <property name="text">
-             <string>Сохранить</string>
+             <string>* Поля, обязательные к заполнению</string>
             </property>
            </widget>
           </item>

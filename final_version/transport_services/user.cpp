@@ -15,7 +15,7 @@ User::User(QString login, QWidget *parent) :
     if(!query_saved_info.exec()){
         qDebug() <<"User: invalid query. impossible to show current info";
     }
-    //int count_test = 0;
+
     query_saved_info.next();
     ui->label_login->setText(query_saved_info.value(0).toString());
     ui->lineEdit_name->setText(query_saved_info.value(1).toString());
@@ -24,16 +24,12 @@ User::User(QString login, QWidget *parent) :
     ui->lineEdit_phone->setText(query_saved_info.value(4).toString());
     ui->lineEdit_email->setText(query_saved_info.value(5).toString());
 
-    qDebug() << query_saved_info.value(0).toString() << "set text";
-
     cur_orders_model = new QSqlQueryModel();
     show_orders(cur_orders_model, "cur_orders");
 
     QSqlQueryModel *archive_model = new QSqlQueryModel();
     show_orders(archive_model, "archive_orders");
 
-
-    //заполнение комбобоксов
     QStringList types_product;
     types_product << "путь следования" << "объемный номер" << "расписание";
     ui->comboBox_type_product->addItems(types_product);
@@ -54,8 +50,6 @@ User::~User()
 {
     delete ui;
 }
-
-
 
 void User::on_pB_save_info_clicked()
 {

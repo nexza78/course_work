@@ -56,8 +56,6 @@ void SignUp::on_pB_confirm_register_clicked()
     phone_nmb = ui->lineEdit_phone_nmb->text();
     email = ui->lineEdit_email->text();
 
-    //проверка на корректность - ?
-
     QSqlQuery query_login;
     query_login.prepare("select login from Users");
     if(query_login.exec()){
@@ -71,9 +69,6 @@ void SignUp::on_pB_confirm_register_clicked()
                 break;
             }
         }
-    }
-    else{
-        qDebug("signup.cpp query_login: invalid query");
     }
 
     if(confirm_passwd != passwd){

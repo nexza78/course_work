@@ -11,14 +11,8 @@ Login::Login(QWidget *parent)
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("E:/course_work/final_version/transport_services/sqlitedb.db");
-    //mydb.setDatabaseName("..//sqlitedb.db");
 
-    if(!mydb.open()){
-        QMessageBox::warning(this, "Ошибка!", "Невозможно установить соединение с базой данных!");
-        this->close();
-    }else{
-        ui->label->setText("Соединение с базой данных установлено!");
-    }
+    mydb.open();
 }
 
 Login::~Login()

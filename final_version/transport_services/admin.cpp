@@ -8,6 +8,19 @@ Admin::Admin(QString login, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    QSqlQuery query_saved_info;
+    query_saved_info.prepare("select login, First_Name, Last_Name, Middle_name, Phone_number, Email from Users where login = :cur_log");
+    query_saved_info.bindValue(":cur_log", cur_login);
+    if(!query_saved_info.exec()){
+        qDebug() <<"User: invalid query. impossible to show current info";
+    }
+
+    query_saved_info.next();
+    ui->label_login->setText(query_saved_info.value(0).toString());
+    ui->lineEdit_name->setText(query_saved_info.value(1).toString());
+    ui->lineE_surname->setText(query_saved_info.value(2).toString());
+    ui->lineEdit_middle_name->setText(query_saved_info.value(3).toString());
+
     QSqlQueryModel *cur_orders = new QSqlQueryModel();
     cur_orders->setQuery("select * from orders");
     ui->tableView_cur_orders->setModel(cur_orders);
@@ -42,6 +55,76 @@ Admin::Admin(QString login, QWidget *parent) :
     show_orders(cur_orders_model, "cur_orders");
 }
 
+void Admin::on_pB_save_info_clicked()
+{
+    bool bool_name = 0;
+    bool bool_surname = 0;
+    bool bool_middle_name = 0;
+    bool bool_phone_nmb   = 0;
+    bool bool_email       = 0;
+
+    bool_name = ui->lineEdit_name->text().isEmpty();
+    bool_surname = ui->lineE_surname->text().isEmpty();
+    bool_middle_name = ui->lineEdit_middle_name->text().isEmpty();
+
+    if(bool_name  || bool_surname  || bool_middle_name || bool_phone_nmb  || bool_email){
+        QMessageBox::warning(this, "Ошибка!", "Заполните все поля!");
+        return;
+    }
+
+    QString passwd = "";
+    QString confirm_passwd = "";
+    QString name = "";
+    QString surname = "";
+    QString middle_name = "";
+    QString phone_nmb   = "";
+    QString email       = "";
+
+
+    passwd = ui->lineE_passwd->text();
+    confirm_passwd = ui->lineE_passwd_confirm->text();
+    name = ui->lineEdit_name->text();
+    surname = ui->lineE_surname->text();
+    middle_name = ui->lineEdit_middle_name->text();
+    qDebug() << name << ' ' << surname << ' ';
+
+    //проверка на корректность - ?
+    bool bool_passwd = 0;
+    bool bool_passwd_confirm = 0;
+
+    bool_passwd = ui->lineE_passwd->text().isEmpty();
+    bool_passwd_confirm = ui->lineE_passwd_confirm->text().isEmpty();
+
+
+    QSqlQuery query;
+    if(!bool_passwd || !bool_passwd_confirm){
+        if(confirm_passwd != passwd){
+            QMessageBox::warning(this, "Ошибка!", "Пароли не совпадают!");
+            return;
+        }
+        else{
+            query.prepare("update Users set password = :pswd, First_Name =:name, Last_Name =:surname, Middle_name = :m_name, Phone_number =:phone, Email = :email where login = :cur_log");
+            query.bindValue(":pswd", passwd);
+        }
+    }
+    else{
+        query.prepare("update Users set First_Name =:name, Last_Name =:surname, Middle_name = :m_name, Phone_number =:phone, Email = :email where login = :cur_log");
+    }
+    query.bindValue(":name", name);
+    query.bindValue(":surname", surname);
+    query.bindValue(":m_name", middle_name);
+    query.bindValue(":phone", phone_nmb);
+    query.bindValue(":email", email);
+    query.bindValue(":cur_log", cur_login);
+    if(query.exec()){
+        QMessageBox::information(this, "Информация о пользователе", "Данные сохранены!");
+    }
+    else{
+        qDebug() <<"User: invalid query. impossible to change info";
+    }
+
+}
+
 void Admin::add_ID_orders(){
     ui->comboBox_ID->clear();
     QSqlQuery id_order;
@@ -60,116 +143,42 @@ Admin::~Admin()
     delete ui;
 }
 
-void Admin::on_pB_save_info_clicked()
-{
-    QString passwd = "";
-    QString passwd_confirm = "";
-    QString name = "";
-    QString surname = "";
-    QString middle_name = "";
+//void Admin::on_pB_save_info_clicked()
+//{
+//    QString passwd = "";
+//    QString passwd_confirm = "";
+//    QString name = "";
+//    QString surname = "";
+//    QString middle_name = "";
 
-    passwd = ui->lineE_passwd->text();
-    name = ui->lineEdit_name->text();
-    surname = ui->lineE_surname->text();
-    middle_name = ui->lineEdit_middle_name->text();
-    passwd_confirm = ui->lineE_passwd_confirm->text();
+//    passwd = ui->lineE_passwd->text();
+//    name = ui->lineEdit_name->text();
+//    surname = ui->lineE_surname->text();
+//    middle_name = ui->lineEdit_middle_name->text();
+//    passwd_confirm = ui->lineE_passwd_confirm->text();
 
-    QSqlQuery query;
-    query.prepare("update Users set password = :pswd, First_name =:name, Last_name =:surname, Middle_name = :m_name where login = :cur_log");
+//    QSqlQuery query;
+//    query.prepare("update Users set password = :pswd, First_name =:name, Last_name =:surname, Middle_name = :m_name where login = :cur_log");
 
-    query.bindValue(":cur_log", cur_login);
-    query.bindValue(":pswd", passwd);
-    query.bindValue(":name", name);
-    query.bindValue(":surname", surname);
-    query.bindValue(":m_name", middle_name);
+//    query.bindValue(":cur_log", cur_login);
+//    query.bindValue(":pswd", passwd);
+//    query.bindValue(":name", name);
+//    query.bindValue(":surname", surname);
+//    query.bindValue(":m_name", middle_name);
 
-    qDebug() << cur_login;
+//    qDebug() << cur_login;
 
-    if(!query.exec()){
-        qDebug() << "invalid query to change info";
-    }
-}
+//    if(!query.exec()){
+//        qDebug() << "invalid query to change info";
+//    }
+//}
 
 void Admin::on_pushButton_change_acc_clicked()
 {
 
 }
 
-void Admin::on_pushButton_add_size_clicked()
-{
-    QString selected_prod_type = ui->comboBox_product_type->currentText();
-    QString selected_tr_type = ui->comboBox_transport_type->currentText();
-    QString new_route = ui->lineEdit_new_route->text();
 
-    int width = ui->spinBox_width->value();
-    int height = ui->spinBox_height->value();
-    int thickness = ui->spinBox_thickness->value();
-
-    if(width == 0 || height == 0){
-        QMessageBox::information(this, "Добавление размера", "Указан неверный размер.");
-        return;
-    }
-
-    if(thickness == 0 && selected_prod_type == "объемный номер"){
-        QMessageBox::information(this, "Добавление размера", "Указанный размер невозможен для данного изделия.");
-        return;
-    }
-
-    if(thickness != 0 && selected_prod_type != "объемный номер"){
-        QMessageBox::information(this, "Добавление размера", "Указанный размер невозможен для данного изделия.");
-        return;
-    }
-
-    if(new_route == ""){
-        QMessageBox::information(this, "Добавление размера", "Не указан маршрут.");
-        return;
-    }
-
-    QSqlQuery cur_size;
-    cur_size.prepare("select * from Products where product_type = :prod_type and type_transport = :tr_type and route_number = :route and deleted = 0");
-    cur_size.bindValue(":prod_type", selected_prod_type);
-    cur_size.bindValue(":tr_type", selected_tr_type);
-    cur_size.bindValue(":route", new_route);
-
-
-    QSqlQuery query_add_size;
-    if(cur_size.exec()){
-        int count = 0;
-        if(cur_size.next()){
-            count++;
-        }
-        if(count != 0){
-            QMessageBox::information(this, "Добавление размера", "Будет изменен существующий размер.");
-            query_add_size.prepare("update Products set width = :width, height = :height, thickness = :thickness where product_type = :selected_product and type_transport = :selected_transport and route_number = :route_number");
-        }
-        else{
-            query_add_size.prepare("insert into Products(product_type, type_transport, route_number, width, height, thickness) values(:selected_product, :selected_transport, :route_number, :width, :height, :thickness)");
-
-        }
-    }
-
-
-    QMessageBox::StandardButton reply;
-
-    reply = QMessageBox::question(this, "Добавление размера", "Вы уверены, что хотите добавить размер? ",
-                                    QMessageBox::Yes|QMessageBox::Cancel);
-    if (reply == QMessageBox::Yes) {
-      qDebug() << "Yes";
-      query_add_size.bindValue(":selected_product", selected_prod_type);
-      query_add_size.bindValue(":selected_transport", selected_tr_type);
-      query_add_size.bindValue(":route_number", new_route);
-      query_add_size.bindValue(":width", width);
-      query_add_size.bindValue(":height", height);
-      query_add_size.bindValue(":thickness", thickness);
-
-      if(query_add_size.exec()){
-          qDebug()<<  "aaaaaaa admin add size";
-          add_items_combobox_route_number();
-          update_cur_size();
-          return;
-      }
-    }
-}
 
 void Admin::update_cur_size(){
     selected_prod_type = ui->comboBox_product_type->currentText();
@@ -224,65 +233,17 @@ void Admin::on_pushButton_del_size_clicked()
     }
 }
 
-void Admin::on_pushButton_change_size_clicked()
+void Admin::on_pushButton_add_size_clicked()
 {
-    QString cur_size = ui->label_cur_size->text();
-    if(cur_size == "..." || cur_size == "Размер не существует"){
-        QMessageBox::information(this, "Изменение размера", "Выбранный размер не существует. Изменение размера доступно после его добавления.");
-        return;
-    }
-
-    int width = ui->spinBox_width->value();
-    int height = ui->spinBox_height->value();
-    int thickness = ui->spinBox_thickness->value();
-
-    if(width == 0 || height == 0){
-        QMessageBox::information(this, "Изменение размера", "Указан неверный размер.");
-        return;
-    }
-
-    if(thickness == 0 && selected_prod_type == "объемный номер"){
-        QMessageBox::information(this, "Изменение размера", "Указанный размер невозможен для данного изделия.");
-        return;
-    }
-
-    QMessageBox::StandardButton reply;
-
-    reply = QMessageBox::question(this, "Изменение размера", "Вы уверены, что хотите изменить размер? ",
-                                    QMessageBox::Yes|QMessageBox::Cancel);
-    if (reply == QMessageBox::Yes) {
-      qDebug() << "Yes";
-
-      QSqlQuery query_match_info;
-      query_match_info.prepare("select ID_products from Products where product_type = :selected_product and type_transport =:selected_transport and route_number = :selected_route_number and deleted = 0");
-
-      query_match_info.bindValue(":selected_product", selected_prod_type);
-      query_match_info.bindValue(":selected_transport", selected_tr_type);
-      query_match_info.bindValue(":selected_route_number", selected_route);
-
-      query_match_info.exec();
-
-      int ID_products = -1;
-
-      if(query_match_info.next()){
-          ID_products = query_match_info.value(0).toInt();
-      }
-
-      QSqlQuery query_del_size;
-      query_del_size.prepare("update Products set width = :width, height = :height, thickness = :thickness where ID_products = :ID_products");
-      query_del_size.bindValue(":width", width);
-      query_del_size.bindValue(":height", height);
-      query_del_size.bindValue(":thickness", thickness);
-      query_del_size.bindValue(":ID_products", ID_products);
-
-      if(query_del_size.exec()){
-          update_cur_size();
-      }
-
-      }
+    insert_update_sizes('a');
 }
 
-void Admin::check_order_conditions(char chosen){
+void Admin::on_pushButton_change_size_clicked()
+{
+    insert_update_sizes('c');
+}
+
+void Admin::insert_update_sizes(char chosen){
     QString chosen_param = "";
 
     if(chosen == 'a'){
@@ -437,12 +398,8 @@ void Admin::on_pushButton_save_orders_clicked()
       query_add_size.bindValue(":deadline", deadline);
       query_add_size.bindValue(":Id", Id_order);
 
-      if(!query_add_size.exec()){
-          qDebug()<<":(((((";
-      }
-      else{
-          qDebug()<<":))))))";
-      }
+      query_add_size.exec();
+
       show_orders(archive_model, "archive");
       show_orders(cur_orders_model, "cur_orders");
       add_ID_orders();
@@ -460,12 +417,7 @@ void Admin::on_pushButton_set_price_clicked()
     query_add_size.bindValue(":price", price);
     query_add_size.bindValue(":Id", Id_order);
 
-    if(!query_add_size.exec()){
-        qDebug()<<":(((((";
-    }
-    else{
-        qDebug()<<":))))))";
-    }
+    query_add_size.exec();
 
     show_orders(cur_orders_model, "cur_orders");
 }
@@ -486,12 +438,8 @@ void Admin::on_pushButton_set_status_clicked()
       query_add_size.bindValue(":status", status);
       query_add_size.bindValue(":Id", Id_order);
 
-      if(!query_add_size.exec()){
-          qDebug()<<":(((((";
-      }
-      else{
-          qDebug()<<":))))))";
-      }
+      query_add_size.exec();
+
       show_orders(archive_model, "archive");
       show_orders(cur_orders_model, "cur_orders");
       add_ID_orders();
@@ -504,17 +452,12 @@ void Admin::on_pushButton_set_date_clicked()
     int Id_order = ui->comboBox_ID->currentText().toInt();
     QDate deadline = ui->dateEdit->date();
 
-    QMessageBox::information(this, "Обработка заказа", "Цена установлена!");
+    QMessageBox::information(this, "Обработка заказа", "Дата установлена!");
     QSqlQuery query_add_size;
     query_add_size.prepare("update Orders set deadline = :deadline where ID_order = :Id");
     query_add_size.bindValue(":deadline", deadline);
     query_add_size.bindValue(":Id", Id_order);
 
-    if(!query_add_size.exec()){
-        qDebug()<<":(((((";
-    }
-    else{
-        qDebug()<<":))))))";
-    }
+    query_add_size.exec();
     show_orders(cur_orders_model, "cur_orders");
 }
