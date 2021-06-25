@@ -12,9 +12,7 @@ User::User(QString login, QWidget *parent) :
     QSqlQuery query_saved_info;
     query_saved_info.prepare("select login, First_Name, Last_Name, Middle_name, Phone_number, Email from Users where login = :cur_log");
     query_saved_info.bindValue(":cur_log", cur_login);
-    if(!query_saved_info.exec()){
-        qDebug() <<"User: invalid query. impossible to show current info";
-    }
+    query_saved_info.exec();
 
     query_saved_info.next();
     ui->label_login->setText(query_saved_info.value(0).toString());
@@ -39,7 +37,7 @@ User::User(QString login, QWidget *parent) :
     ui->comboBox_type_transport->addItems(types_transport);
 
     QSqlQuery query_routes;
-    query_routes.prepare("select Distinct route_number from Products");
+    query_routes.prepare("select Distinct route_number from Products where deleted = 0");
     query_routes.exec();
     while(query_routes.next()){
         ui->comboBox_route_number->addItem(query_routes.value(0).toString());
@@ -86,9 +84,7 @@ void User::on_pB_save_info_clicked()
     middle_name = ui->lineEdit_middle_name->text();
     phone_nmb = ui->lineEdit_phone->text();
     email = ui->lineEdit_email->text();
-    qDebug() << name << ' ' << surname << ' ';
 
-    //проверка на корректность - ?
     bool bool_passwd = 0;
     bool bool_passwd_confirm = 0;
 
@@ -119,17 +115,12 @@ void User::on_pB_save_info_clicked()
     if(query.exec()){
         QMessageBox::information(this, "Информация о пользователе", "Данные сохранены!");
     }
-    else{
-        qDebug() <<"User: invalid query. impossible to change info";
-    }
-
 }
 
 void User::on_pushButton_change_acc_clicked()
 {
-    //login_ptr = new Login();
-    //login_ptr->show();
-    //this->close();
+    emit login_window();
+    this->close();
 }
 
 
@@ -148,7 +139,7 @@ void User::show_orders(QSqlQueryModel *orders_tables, QString table_type){
 
     query_orders.bindValue(":login", cur_login);
     query_orders.bindValue(":end_status", "Завершен");
-    qDebug() << query_orders.exec();
+    query_orders.exec();
     orders_tables->setQuery(query_orders);
 
     orders_tables->setHeaderData(0, Qt::Horizontal, "Тип продукта");
@@ -203,7 +194,6 @@ void User::on_pB_save_new_order_clicked()
     reply = QMessageBox::question(this, "Новый заказ", "Вы собираетесь добавить новый заказ. Отменить его будет невозможно. Продолжить? ",
                                     QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
-      qDebug() << "Yes";
       QSqlQuery query_new_order;
       query_new_order.prepare("insert into Orders (login, kolvo,ID_products) values (:login, :kolvo, :id)");
       query_new_order.bindValue(":login", cur_login);
@@ -213,11 +203,6 @@ void User::on_pB_save_new_order_clicked()
       query_new_order.exec();
 
       show_orders(cur_orders_model, "cur_orders");
-      //connect(ui->tableView_cur_orders, SIGNAL(currentTextChanged(QString)), this, );
-
-    } else {
-      qDebug() << "Yes was *not* clicked";
-      return;
     }
 }
 

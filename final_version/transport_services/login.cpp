@@ -11,7 +11,6 @@ Login::Login(QWidget *parent)
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
     mydb.setDatabaseName("E:/course_work/final_version/transport_services/sqlitedb.db");
-
     mydb.open();
 }
 
@@ -21,13 +20,13 @@ Login::~Login()
 }
 
 
-void Login::on_pushButton_signIn_clicked()
+void Login::on_pushButton_signIn_3_clicked()
 {
     QString login = "", passwd = "";
-    login = ui->lineEdit_login->text();
-    passwd = ui->lineEdit_passwd->text();
+    login = ui->lineEdit_login_3->text();
+    passwd = ui->lineEdit_passwd_3->text();
 
-    int ind = ui->comboBox->currentIndex();
+    int ind = ui->comboBox_3->currentIndex();
 
     QSqlQuery query;
 
@@ -47,37 +46,35 @@ void Login::on_pushButton_signIn_clicked()
             count_rows++;
         }
         if(count_rows != 0){
-            qDebug() << "is logged in";
             if(ind){
                 admin = new Admin(login);
                 admin->show();
-                this->close();
+                connect(admin, &Admin::login_window, this, &Login::show);
+                this->hide();
             }
             else{
                 user = new User(login);
                 user->show();
-                this->close();
-            }
+                connect(user, &User::login_window, this, &Login::show);
+                this->hide();
 
+
+            }
+            ui->lineEdit_login_3->clear();
+            ui->lineEdit_passwd_3->clear();
         }
         else
         {
-            qDebug() << "Login failed. Invalid username or password.";
-            qDebug()<< login << passwd<< ind;
             QMessageBox::warning(this, "Ошибка!", "Неправильный логин или пароль!");
             return;
         }
     }
-    else{
-        qDebug() << "Login failed. Invalid query.";
-    }
-
 }
 
-void Login::on_pushButton_signUp_clicked()
+
+
+void Login::on_pushButton_signUp_3_clicked()
 {
-    //this->close();
-    //hide();
     sign_up = new SignUp();
     sign_up->show();
 }

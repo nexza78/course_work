@@ -25,13 +25,9 @@ private slots:
     void update_cur_size();
     void on_pushButton_del_size_clicked();
     void on_pushButton_change_size_clicked();
-
     void on_pushButton_save_orders_clicked();
-
     void on_pushButton_set_price_clicked();
-
     void on_pushButton_set_status_clicked();
-
     void on_pushButton_set_date_clicked();
 
 private:
@@ -47,6 +43,9 @@ private:
     int count_sizes();
     void show_orders(QSqlQueryModel *orders_tables, QString table_type);
     void insert_update_sizes(char chosen);
+
+signals:
+    void login_window();
 };
 
 #endif // ADMIN_H

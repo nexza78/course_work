@@ -5,6 +5,7 @@
 #include<QMessageBox>
 #include<QDebug>
 #include<QtSql>
+#include<QStackedWidget>
 
 namespace Ui {
 class User;
@@ -31,6 +32,9 @@ private:
     QString cur_login = "";
     void show_orders(QSqlQueryModel *orders_tables, QString table_type);
     QSqlQueryModel *cur_orders_model = nullptr;
+
+signals:
+    void login_window();
 };
 
 #endif // USER_H

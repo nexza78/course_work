@@ -5,6 +5,7 @@
 #include<QtSql>
 #include<QtDebug>
 #include <QMessageBox>
+#include<QStackedWidget>
 #include "signup.h"
 #include "admin.h"
 #include "user.h"
@@ -22,8 +23,10 @@ public:
     ~Login();
 
 private slots:
-    void on_pushButton_signIn_clicked();
-    void on_pushButton_signUp_clicked();
+
+    void on_pushButton_signIn_3_clicked();
+
+    void on_pushButton_signUp_3_clicked();
 
 private:
     Ui::Login *ui;
@@ -31,5 +34,6 @@ private:
     SignUp *sign_up;
     User *user;
     Admin *admin;
+    QStackedWidget *stackedWidget;
 };
 #endif // LOGIN_H

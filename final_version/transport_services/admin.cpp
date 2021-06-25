@@ -11,9 +11,7 @@ Admin::Admin(QString login, QWidget *parent) :
     QSqlQuery query_saved_info;
     query_saved_info.prepare("select login, First_Name, Last_Name, Middle_name, Phone_number, Email from Users where login = :cur_log");
     query_saved_info.bindValue(":cur_log", cur_login);
-    if(!query_saved_info.exec()){
-        qDebug() <<"User: invalid query. impossible to show current info";
-    }
+    query_saved_info.exec();
 
     query_saved_info.next();
     ui->label_login->setText(query_saved_info.value(0).toString());
@@ -25,8 +23,6 @@ Admin::Admin(QString login, QWidget *parent) :
     cur_orders->setQuery("select * from orders");
     ui->tableView_cur_orders->setModel(cur_orders);
 
-
-    //заполнение комбобоксов
     QStringList types_product;
     QStringList types_transport;
     QStringList statuses;
@@ -40,8 +36,6 @@ Admin::Admin(QString login, QWidget *parent) :
     ui->comboBox_set_status->addItems(statuses);
     add_items_combobox_route_number();
 
-    //конец заполнения
-
     connect(ui->comboBox_product_type, SIGNAL(currentTextChanged(QString)), this, SLOT(update_cur_size()));
     connect(ui->comboBox_transport_type, SIGNAL(currentTextChanged(QString)), this, SLOT(update_cur_size()));
     connect(ui->comboBox_route_number, SIGNAL(currentTextChanged(QString)), this, SLOT(update_cur_size()));
@@ -50,8 +44,8 @@ Admin::Admin(QString login, QWidget *parent) :
     add_ID_orders();
 
     archive_model = new QSqlQueryModel();
-    show_orders(archive_model, "archive");
     cur_orders_model = new QSqlQueryModel();
+    show_orders(archive_model, "archive");
     show_orders(cur_orders_model, "cur_orders");
 }
 
@@ -86,9 +80,7 @@ void Admin::on_pB_save_info_clicked()
     name = ui->lineEdit_name->text();
     surname = ui->lineE_surname->text();
     middle_name = ui->lineEdit_middle_name->text();
-    qDebug() << name << ' ' << surname << ' ';
 
-    //проверка на корректность - ?
     bool bool_passwd = 0;
     bool bool_passwd_confirm = 0;
 
@@ -110,19 +102,17 @@ void Admin::on_pB_save_info_clicked()
     else{
         query.prepare("update Users set First_Name =:name, Last_Name =:surname, Middle_name = :m_name, Phone_number =:phone, Email = :email where login = :cur_log");
     }
+
     query.bindValue(":name", name);
     query.bindValue(":surname", surname);
     query.bindValue(":m_name", middle_name);
     query.bindValue(":phone", phone_nmb);
     query.bindValue(":email", email);
     query.bindValue(":cur_log", cur_login);
+
     if(query.exec()){
         QMessageBox::information(this, "Информация о пользователе", "Данные сохранены!");
     }
-    else{
-        qDebug() <<"User: invalid query. impossible to change info";
-    }
-
 }
 
 void Admin::add_ID_orders(){
@@ -145,16 +135,14 @@ Admin::~Admin()
 
 void Admin::on_pushButton_change_acc_clicked()
 {
-
+    emit login_window();
+    this->close();
 }
-
-
 
 void Admin::update_cur_size(){
     selected_prod_type = ui->comboBox_product_type->currentText();
     selected_tr_type = ui->comboBox_transport_type->currentText();
     selected_route = ui->comboBox_route_number->currentText();
-
 
     QSqlQuery cur_size;
     cur_size.prepare("select width, height, thickness from Products where product_type = :prod_type and type_transport = :tr_type and route_number = :route and deleted = 0");
@@ -167,7 +155,6 @@ void Admin::update_cur_size(){
         if(cur_size.next()){
             count++;
         }
-
         if(count != 0){
             ui->label_cur_size->setText(cur_size.value(0).toString() + " x " + cur_size.value(1).toString() + " x " + cur_size.value(2).toString());
         }else{
@@ -189,8 +176,6 @@ void Admin::on_pushButton_del_size_clicked()
     reply = QMessageBox::question(this, "Удаление размера", "Вы уверены, что хотите удалить размер? ",
                                     QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
-      qDebug() << "Yes";
-
       QSqlQuery query_del_size;
       query_del_size.prepare("update Products set deleted = 1 where product_type = :prod_type and type_transport = :tr_type and route_number = :route");
       query_del_size.bindValue(":prod_type", selected_prod_type);
@@ -221,6 +206,7 @@ void Admin::insert_update_sizes(char chosen){
     }
     else{
         chosen_param = "Изменение размера";
+        ui->lineEdit_new_route->clear();
     }
 
     QString new_route = ui->lineEdit_new_route->text();
@@ -253,7 +239,12 @@ void Admin::insert_update_sizes(char chosen){
     cur_size.prepare("select * from Products where product_type = :prod_type and type_transport = :tr_type and route_number = :route and deleted = 0");
     cur_size.bindValue(":prod_type", selected_prod_type);
     cur_size.bindValue(":tr_type", selected_tr_type);
-    cur_size.bindValue(":route", new_route);
+    if(chosen == 'a'){
+        cur_size.bindValue(":route", new_route);
+    }
+    else{
+        cur_size.bindValue(":route", selected_route);
+    }
 
     QSqlQuery query_add_size;
     if(cur_size.exec()){
@@ -269,10 +260,13 @@ void Admin::insert_update_sizes(char chosen){
         }
         else{
             if(chosen != 'a'){
-                QMessageBox::information(this, chosen_param, "Размер не существует, будет доваблен новый размер.");
+                QMessageBox::information(this, chosen_param, "Размер не существует, будет добавлен новый размер.");
+                if(selected_route == ""){
+                    QMessageBox::information(this, chosen_param, "Не указан маршрут.");
+                    return;
+                }
             }
             query_add_size.prepare("insert into Products(product_type, type_transport, route_number, width, height, thickness) values(:selected_product, :selected_transport, :route_number, :width, :height, :thickness)");
-
         }
     }
 
@@ -281,10 +275,14 @@ void Admin::insert_update_sizes(char chosen){
     reply = QMessageBox::question(this, chosen_param, "Вы уверены, что хотите сохранить размер? ",
                                     QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
-      qDebug() << "Yes";
       query_add_size.bindValue(":selected_product", selected_prod_type);
       query_add_size.bindValue(":selected_transport", selected_tr_type);
-      query_add_size.bindValue(":route_number", new_route);
+      if(chosen == 'a'){
+        query_add_size.bindValue(":route_number", new_route);
+      }
+      else{
+          query_add_size.bindValue(":route_number", selected_route);
+      }
       query_add_size.bindValue(":width", width);
       query_add_size.bindValue(":height", height);
       query_add_size.bindValue(":thickness", thickness);
@@ -300,7 +298,7 @@ void Admin::insert_update_sizes(char chosen){
 void Admin::add_items_combobox_route_number(){
     ui->comboBox_route_number->clear();
     QSqlQuery query_routes;
-    query_routes.prepare("select Distinct route_number from Products");
+    query_routes.prepare("select Distinct route_number from Products where deleted = 0");
     query_routes.exec();
     while(query_routes.next()){
         ui->comboBox_route_number->addItem(query_routes.value(0).toString());
@@ -353,14 +351,10 @@ void Admin::on_pushButton_save_orders_clicked()
     QString status = ui->comboBox_set_status->currentText();
     QDate deadline = ui->dateEdit->date();
 
-    qDebug() << Id_order << " " << price << ' '<< status<< ' ' << deadline;
-
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Обработка заказа", "Вы уверены, что хотите сохранить данные? ",
                                     QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
-      qDebug() << "Yes";
-
       QSqlQuery query_add_size;
       query_add_size.prepare("update Orders set price = :price, status = :status, deadline = :deadline where ID_order = :Id");
       query_add_size.bindValue(":price", price);
@@ -401,8 +395,6 @@ void Admin::on_pushButton_set_status_clicked()
     reply = QMessageBox::question(this, "Обработка заказа", "Вы уверены, что хотите изменить статус заказа? ",
                                     QMessageBox::Yes|QMessageBox::Cancel);
     if (reply == QMessageBox::Yes) {
-      qDebug() << "Yes";
-
       QSqlQuery query_add_size;
       query_add_size.prepare("update Orders set status = :status where ID_order = :Id");
       query_add_size.bindValue(":status", status);

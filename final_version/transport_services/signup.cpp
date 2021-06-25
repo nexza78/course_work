@@ -62,7 +62,6 @@ void SignUp::on_pB_confirm_register_clicked()
         while(query_login.next()){
             QString cur_login = query_login.value(0).toString();
             if(cur_login == login){
-                qDebug() << "Login is busy!";
                 QMessageBox::warning(this, "Ошибка!", "Логин занят!");
                 ui->lineE_login->clear();
                 return;
