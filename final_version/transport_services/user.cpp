@@ -119,22 +119,26 @@ void User::on_pB_save_info_clicked()
 
 void User::on_pushButton_change_acc_clicked()
 {
-    emit login_window();
-    this->close();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Смена пользователя", "Вы действительно хотите выйти из текущего аккаунта?",
+                                    QMessageBox::Yes|QMessageBox::Cancel);
+    if (reply == QMessageBox::Yes) {
+        emit login_window();
+        this->close();
+    }
 }
 
 
 void User::show_orders(QSqlQueryModel *orders_tables, QString table_type){
 
     QSqlQuery query_orders;
+    QString query_part = "select Products.product_type, Products.type_transport, Products.route_number, "
+                             "Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, "
+                                "Orders.kolvo from Orders inner join Products on Products.ID_products = Orders.ID_products where Orders.login = :login and Orders.status";
     if(table_type == "cur_orders"){
-        query_orders.prepare("select Products.product_type, Products.type_transport, Products.route_number, "
-                             "Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, "
-                                "Orders.kolvo from Orders inner join Products on Products.ID_products = Orders.ID_products where Orders.login = :login and Orders.status <> :end_status");
+        query_orders.prepare(query_part + " <> :end_status");
     }else{
-        query_orders.prepare("select Products.product_type, Products.type_transport, Products.route_number, "
-                             "Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, "
-                                "Orders.kolvo from Orders inner join Products on Products.ID_products = Orders.ID_products where Orders.login = :login and Orders.status = :end_status");
+        query_orders.prepare(query_part + " = :end_status");
     }
 
     query_orders.bindValue(":login", cur_login);

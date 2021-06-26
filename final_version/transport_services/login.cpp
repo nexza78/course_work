@@ -20,13 +20,13 @@ Login::~Login()
 }
 
 
-void Login::on_pushButton_signIn_3_clicked()
+void Login::on_pushButton_signIn_clicked()
 {
     QString login = "", passwd = "";
-    login = ui->lineEdit_login_3->text();
-    passwd = ui->lineEdit_passwd_3->text();
+    login = ui->lineEdit_login->text();
+    passwd = ui->lineEdit_passwd->text();
 
-    int ind = ui->comboBox_3->currentIndex();
+    int ind = ui->comboBox_role->currentIndex();
 
     QSqlQuery query;
 
@@ -60,8 +60,8 @@ void Login::on_pushButton_signIn_3_clicked()
 
 
             }
-            ui->lineEdit_login_3->clear();
-            ui->lineEdit_passwd_3->clear();
+            ui->lineEdit_login->clear();
+            ui->lineEdit_passwd->clear();
         }
         else
         {
@@ -71,9 +71,7 @@ void Login::on_pushButton_signIn_3_clicked()
     }
 }
 
-
-
-void Login::on_pushButton_signUp_3_clicked()
+void Login::on_pushButton_signUp_clicked()
 {
     sign_up = new SignUp();
     sign_up->show();

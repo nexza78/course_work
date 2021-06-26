@@ -135,8 +135,13 @@ Admin::~Admin()
 
 void Admin::on_pushButton_change_acc_clicked()
 {
-    emit login_window();
-    this->close();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Смена пользователя", "Вы действительно хотите выйти из текущего аккаунта?",
+                                    QMessageBox::Yes|QMessageBox::Cancel);
+    if (reply == QMessageBox::Yes) {
+        emit login_window();
+        this->close();
+    }
 }
 
 void Admin::update_cur_size(){
@@ -307,10 +312,11 @@ void Admin::add_items_combobox_route_number(){
 
 void Admin::show_orders(QSqlQueryModel *model, QString table_type){
     QSqlQuery query_orders;
+    QString query_part = "select Orders.Id_order, Products.product_type, Products.type_transport, Products.route_number, Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, Orders.kolvo, Users.Last_Name, Users.First_name, Users.Middle_name, Users.Phone_number, Users.Email from Orders inner join Products on Products.ID_products = Orders.ID_products inner join Users on Users.login = Orders.login where Orders.status";
     if(table_type == "cur_orders"){
-        query_orders.prepare("select Orders.Id_order, Products.product_type, Products.type_transport, Products.route_number, Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, Orders.kolvo, Users.Last_Name, Users.First_name, Users.Middle_name, Users.Phone_number, Users.Email from Orders inner join Products on Products.ID_products = Orders.ID_products inner join Users on Users.login = Orders.login where Orders.status <> :end_status");
+        query_orders.prepare(query_part + " <> :end_status");
     }else{
-        query_orders.prepare("select Orders.Id_order, Products.product_type, Products.type_transport, Products.route_number, Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, Orders.kolvo, Users.Last_Name, Users.First_name, Users.Middle_name, Users.Phone_number, Users.Email from Orders inner join Products on Products.ID_products = Orders.ID_products inner join Users on Users.login = Orders.login where Orders.status = :end_status");
+        query_orders.prepare(query_part + " = :end_status");
     }
 
     query_orders.bindValue(":login", cur_login);
