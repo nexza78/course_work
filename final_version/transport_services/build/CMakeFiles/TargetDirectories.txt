@@ -1,0 +1,5 @@
+E:/course_work/final_version/transport_services/build/CMakeFiles/INSTALL.dir
+E:/course_work/final_version/transport_services/build/CMakeFiles/ALL_BUILD.dir
+E:/course_work/final_version/transport_services/build/CMakeFiles/ZERO_CHECK.dir
+E:/course_work/final_version/transport_services/build/src/CMakeFiles/transport_services.dir
+E:/course_work/final_version/transport_services/build/src/CMakeFiles/INSTALL.dir

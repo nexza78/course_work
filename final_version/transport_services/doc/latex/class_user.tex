@@ -1,0 +1,72 @@
+\hypertarget{class_user}{}\doxysection{Класс User}
+\label{class_user}\index{User@{User}}
+
+
+Окно заказчика  
+
+
+
+
+{\ttfamily \#include $<$user.\+h$>$}
+
+Граф наследования\+:User\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_user}
+\end{center}
+\end{figure}
+\doxysubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_a73b5a301f6d968104481cb0e410a5ab5}\label{class_user_a73b5a301f6d968104481cb0e410a5ab5}} 
+void \mbox{\hyperlink{class_user_a73b5a301f6d968104481cb0e410a5ab5}{login\+\_\+window}} ()
+\begin{DoxyCompactList}\small\item\em Возврат в окну входа \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Закрытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_afde05e993caf3dc556d6a56316e2548e}\label{class_user_afde05e993caf3dc556d6a56316e2548e}} 
+void \mbox{\hyperlink{class_user_afde05e993caf3dc556d6a56316e2548e}{on\+\_\+push\+Button\+\_\+change\+\_\+acc\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Смена аккаунта \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_ab72a4fed63f75d2e72df5f167a0ea209}\label{class_user_ab72a4fed63f75d2e72df5f167a0ea209}} 
+void \mbox{\hyperlink{class_user_ab72a4fed63f75d2e72df5f167a0ea209}{on\+\_\+p\+B\+\_\+save\+\_\+info\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Сохранение информации о пользователе \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_a9164c33f5720c1475d2f231bc298462c}\label{class_user_a9164c33f5720c1475d2f231bc298462c}} 
+void \mbox{\hyperlink{class_user_a9164c33f5720c1475d2f231bc298462c}{on\+\_\+p\+B\+\_\+save\+\_\+new\+\_\+order\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Сохранение нового заказа \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_a21cc18d1f8742aa0a335ad52d7dd5c49}\label{class_user_a21cc18d1f8742aa0a335ad52d7dd5c49}} 
+void \mbox{\hyperlink{class_user_a21cc18d1f8742aa0a335ad52d7dd5c49}{update\+\_\+order\+\_\+tables}} ()
+\begin{DoxyCompactList}\small\item\em Обновление таблицы текущих заказов \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_user_a0251e3e8d525ff6847813c33ae285b0d}{show\+\_\+orders}} (QSql\+Query\+Model $\ast$orders\+\_\+tables, QString table\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Отображение текущих или архивных заказов в таблицах \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Окно заказчика 
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{class_user_a0251e3e8d525ff6847813c33ae285b0d}\label{class_user_a0251e3e8d525ff6847813c33ae285b0d}} 
+\index{User@{User}!show\_orders@{show\_orders}}
+\index{show\_orders@{show\_orders}!User@{User}}
+\doxysubsubsection{\texorpdfstring{show\_orders()}{show\_orders()}}
+{\footnotesize\ttfamily void User\+::show\+\_\+orders (\begin{DoxyParamCaption}\item[{QSql\+Query\+Model $\ast$}]{orders\+\_\+tables,  }\item[{QString}]{table\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Отображение текущих или архивных заказов в таблицах 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em orders\+\_\+tables} & \\
+\hline
+{\em table\+\_\+type} & Выбор типа таблицы Равен \char`\"{}cur\+\_\+orders\char`\"{} для текущих заказов Равен \char`\"{}archive\char`\"{} для архивных заказов \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+user.\+h\item 
+user.\+cpp\end{DoxyCompactItemize}

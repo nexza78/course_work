@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Сервис по управлению заказами: Исходный файл admin.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Сервис по управлению заказами
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">admin.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ADMIN_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ADMIN_H</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;QMainWindow&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include&lt;QtSql&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include&lt;QDebug&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include&lt;QMessageBox&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>Ui {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="class_admin.html">Admin</a>;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_admin.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_admin.html">Admin</a> : <span class="keyword">public</span> QMainWindow</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    Q_OBJECT</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_admin.html#a3338a084b9884bb4a9c51b79cbf76a27">Admin</a>(QString login, QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    ~<a class="code" href="class_admin.html">Admin</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a43d08d8343618bdbea25fceb5584f5e3">on_pushButton_change_acc_clicked</a>();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a0f06125603d47ece686954ccfff898fc">on_pB_save_info_clicked</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a43a0943cff01f54c158afff7feb6ee84">on_pushButton_add_size_clicked</a>();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#aaa7177d1d721005c14e42eafb48a329e">on_pushButton_change_size_clicked</a>();</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a2aa1510bd2f754ac5fd743df5fc8bec5">on_pushButton_del_size_clicked</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a7b07c7403382f577171fa0f0c5b18ef0">update_cur_size</a>();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a4e8e3aa56ae44a6aa87789b1e9cb0ba2">on_pushButton_save_orders_clicked</a>();</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a8d350f2ded724a18564fae22b769cf50">on_pushButton_set_price_clicked</a>();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#ae21444e49b0145c0a309e6c597dcb328">on_pushButton_set_status_clicked</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a69eb1614db8371caba8df6eb69e5c252">on_pushButton_set_date_clicked</a>();</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    Ui::Admin *ui;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    QString cur_login = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    QString selected_prod_type = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    QString selected_tr_type = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    QString selected_route = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    QSqlQueryModel *cur_orders_model = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    QSqlQueryModel *archive_model = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a829de312431e8bccb090fcc819de27de">update_items_combobox_route_number</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#aa0e729ceba4a6fdc241ebe66afdaae12">update_ID_orders</a>();</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a2968e4450119ce857a28ff1de6d235a9">show_orders</a>(QSqlQueryModel *orders_tables, QString table_type);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#aa52ce12f84358ee55507e417bf57771a">insert_update_sizes</a>(<span class="keywordtype">char</span> chosen);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;signals:</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class_admin.html#a96ce8c3189275871f6770128d7fea171">   94</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_admin.html#a96ce8c3189275871f6770128d7fea171">login_window</a>();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// ADMIN_H</span></div>
+<div class="ttc" id="aclass_admin_html"><div class="ttname"><a href="class_admin.html">Admin</a></div><div class="ttdoc">Окно оператора</div><div class="ttdef"><b>Definition:</b> admin.h:15</div></div>
+<div class="ttc" id="aclass_admin_html_a0f06125603d47ece686954ccfff898fc"><div class="ttname"><a href="class_admin.html#a0f06125603d47ece686954ccfff898fc">Admin::on_pB_save_info_clicked</a></div><div class="ttdeci">void on_pB_save_info_clicked()</div><div class="ttdoc">Сохранение информации о пользователе</div><div class="ttdef"><b>Definition:</b> admin.cpp:52</div></div>
+<div class="ttc" id="aclass_admin_html_a2968e4450119ce857a28ff1de6d235a9"><div class="ttname"><a href="class_admin.html#a2968e4450119ce857a28ff1de6d235a9">Admin::show_orders</a></div><div class="ttdeci">void show_orders(QSqlQueryModel *orders_tables, QString table_type)</div><div class="ttdoc">Отображение текущих или архивных заказов в таблицах</div><div class="ttdef"><b>Definition:</b> admin.cpp:313</div></div>
+<div class="ttc" id="aclass_admin_html_a2aa1510bd2f754ac5fd743df5fc8bec5"><div class="ttname"><a href="class_admin.html#a2aa1510bd2f754ac5fd743df5fc8bec5">Admin::on_pushButton_del_size_clicked</a></div><div class="ttdeci">void on_pushButton_del_size_clicked()</div><div class="ttdoc">Удаление размера</div><div class="ttdef"><b>Definition:</b> admin.cpp:171</div></div>
+<div class="ttc" id="aclass_admin_html_a3338a084b9884bb4a9c51b79cbf76a27"><div class="ttname"><a href="class_admin.html#a3338a084b9884bb4a9c51b79cbf76a27">Admin::Admin</a></div><div class="ttdeci">Admin(QString login, QWidget *parent=nullptr)</div><div class="ttdoc">Конструктор</div><div class="ttdef"><b>Definition:</b> admin.cpp:4</div></div>
+<div class="ttc" id="aclass_admin_html_a43a0943cff01f54c158afff7feb6ee84"><div class="ttname"><a href="class_admin.html#a43a0943cff01f54c158afff7feb6ee84">Admin::on_pushButton_add_size_clicked</a></div><div class="ttdeci">void on_pushButton_add_size_clicked()</div><div class="ttdoc">Добавление нового размера</div><div class="ttdef"><b>Definition:</b> admin.cpp:196</div></div>
+<div class="ttc" id="aclass_admin_html_a43d08d8343618bdbea25fceb5584f5e3"><div class="ttname"><a href="class_admin.html#a43d08d8343618bdbea25fceb5584f5e3">Admin::on_pushButton_change_acc_clicked</a></div><div class="ttdeci">void on_pushButton_change_acc_clicked()</div><div class="ttdoc">Смена аккаунта</div><div class="ttdef"><b>Definition:</b> admin.cpp:136</div></div>
+<div class="ttc" id="aclass_admin_html_a4e8e3aa56ae44a6aa87789b1e9cb0ba2"><div class="ttname"><a href="class_admin.html#a4e8e3aa56ae44a6aa87789b1e9cb0ba2">Admin::on_pushButton_save_orders_clicked</a></div><div class="ttdeci">void on_pushButton_save_orders_clicked()</div><div class="ttdoc">Сохранить установленные цену, статус и срок сдачи для заказа</div><div class="ttdef"><b>Definition:</b> admin.cpp:353</div></div>
+<div class="ttc" id="aclass_admin_html_a69eb1614db8371caba8df6eb69e5c252"><div class="ttname"><a href="class_admin.html#a69eb1614db8371caba8df6eb69e5c252">Admin::on_pushButton_set_date_clicked</a></div><div class="ttdeci">void on_pushButton_set_date_clicked()</div><div class="ttdoc">Установить срок сдачи</div><div class="ttdef"><b>Definition:</b> admin.cpp:418</div></div>
+<div class="ttc" id="aclass_admin_html_a7b07c7403382f577171fa0f0c5b18ef0"><div class="ttname"><a href="class_admin.html#a7b07c7403382f577171fa0f0c5b18ef0">Admin::update_cur_size</a></div><div class="ttdeci">void update_cur_size()</div><div class="ttdoc">Обновление отображаемого размера в поле &quot;текущий размер&quot;.</div><div class="ttdef"><b>Definition:</b> admin.cpp:147</div></div>
+<div class="ttc" id="aclass_admin_html_a829de312431e8bccb090fcc819de27de"><div class="ttname"><a href="class_admin.html#a829de312431e8bccb090fcc819de27de">Admin::update_items_combobox_route_number</a></div><div class="ttdeci">void update_items_combobox_route_number()</div><div class="ttdoc">Обновление маршрутов в комбинированном списке comboBox_route_number.</div><div class="ttdef"><b>Definition:</b> admin.cpp:303</div></div>
+<div class="ttc" id="aclass_admin_html_a8d350f2ded724a18564fae22b769cf50"><div class="ttname"><a href="class_admin.html#a8d350f2ded724a18564fae22b769cf50">Admin::on_pushButton_set_price_clicked</a></div><div class="ttdeci">void on_pushButton_set_price_clicked()</div><div class="ttdoc">Установить цену</div><div class="ttdef"><b>Definition:</b> admin.cpp:379</div></div>
+<div class="ttc" id="aclass_admin_html_a96ce8c3189275871f6770128d7fea171"><div class="ttname"><a href="class_admin.html#a96ce8c3189275871f6770128d7fea171">Admin::login_window</a></div><div class="ttdeci">void login_window()</div><div class="ttdoc">Возврат в окну входа</div></div>
+<div class="ttc" id="aclass_admin_html_aa0e729ceba4a6fdc241ebe66afdaae12"><div class="ttname"><a href="class_admin.html#aa0e729ceba4a6fdc241ebe66afdaae12">Admin::update_ID_orders</a></div><div class="ttdeci">void update_ID_orders()</div><div class="ttdoc">Обновление ID заказов в комбинированном списке comboBox_ID.</div><div class="ttdef"><b>Definition:</b> admin.cpp:118</div></div>
+<div class="ttc" id="aclass_admin_html_aa52ce12f84358ee55507e417bf57771a"><div class="ttname"><a href="class_admin.html#aa52ce12f84358ee55507e417bf57771a">Admin::insert_update_sizes</a></div><div class="ttdeci">void insert_update_sizes(char chosen)</div><div class="ttdoc">Добавление или изменение размера по выбору</div><div class="ttdef"><b>Definition:</b> admin.cpp:206</div></div>
+<div class="ttc" id="aclass_admin_html_aaa7177d1d721005c14e42eafb48a329e"><div class="ttname"><a href="class_admin.html#aaa7177d1d721005c14e42eafb48a329e">Admin::on_pushButton_change_size_clicked</a></div><div class="ttdeci">void on_pushButton_change_size_clicked()</div><div class="ttdoc">Изменение размера</div><div class="ttdef"><b>Definition:</b> admin.cpp:201</div></div>
+<div class="ttc" id="aclass_admin_html_ae21444e49b0145c0a309e6c597dcb328"><div class="ttname"><a href="class_admin.html#ae21444e49b0145c0a309e6c597dcb328">Admin::on_pushButton_set_status_clicked</a></div><div class="ttdeci">void on_pushButton_set_status_clicked()</div><div class="ttdoc">Установить статус</div><div class="ttdef"><b>Definition:</b> admin.cpp:395</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+</small></address>
+</body>
+</html>

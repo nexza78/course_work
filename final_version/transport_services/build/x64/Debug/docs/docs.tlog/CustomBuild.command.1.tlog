@@ -1,0 +1,24 @@
+^E:\COURSE_WORK\FINAL_VERSION\TRANSPORT_SERVICES\BUILD\CMAKEFILES\3432DAEED8EDFB26DDBDF999A507CB25\DOCS.RULE
+setlocal
+cd E:\course_work\final_version\transport_services\doc
+if %errorlevel% neq 0 goto :cmEnd
+E:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\doxygen\bin\doxygen.exe" E:/course_work/final_version/transport_services/doc/Doxyfile.in
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^E:\COURSE_WORK\FINAL_VERSION\TRANSPORT_SERVICES\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SE:/course_work/final_version/transport_services -BE:/course_work/final_version/transport_services/build --check-stamp-file E:/course_work/final_version/transport_services/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

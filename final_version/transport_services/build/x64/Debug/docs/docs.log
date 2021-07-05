@@ -1,0 +1,47 @@
+﻿  Generating API documentation with Doxygen
+CUSTOMBUILD : error : configuration file E:/course_work/final_version/transport_services/doc/Doxyfile.in not found!
+  Doxygen version 1.9.1 (ef9b20ac7f8a8621fcfc299f8bd0b80422390f4b)
+  Copyright Dimitri van Heesch 1997-2021
+  
+  You can use doxygen in a number of ways:
+  
+  1) Use doxygen to generate a template configuration file:
+      C:\Program Files\doxygen\bin\doxygen.exe [-s] -g [configName]
+  
+  2) Use doxygen to update an old configuration file:
+      C:\Program Files\doxygen\bin\doxygen.exe [-s] -u [configName]
+  
+  3) Use doxygen to generate documentation using an existing configuration file:
+      C:\Program Files\doxygen\bin\doxygen.exe [configName]
+  
+  4) Use doxygen to generate a template file controlling the layout of the
+     generated documentation:
+      C:\Program Files\doxygen\bin\doxygen.exe -l [layoutFileName]
+  
+      In case layoutFileName is omitted layoutFileName.xml will be used as filename.
+      If - is used for layoutFileName doxygen will write to standard output.
+  
+  5) Use doxygen to generate a template style sheet file for RTF, HTML or Latex.
+      RTF:        C:\Program Files\doxygen\bin\doxygen.exe -w rtf styleSheetFile
+      HTML:       C:\Program Files\doxygen\bin\doxygen.exe -w html headerFile footerFile styleSheetFile [configFile]
+      LaTeX:      C:\Program Files\doxygen\bin\doxygen.exe -w latex headerFile footerFile styleSheetFile [configFile]
+  
+  6) Use doxygen to generate a rtf extensions file
+      RTF:   C:\Program Files\doxygen\bin\doxygen.exe -e rtf extensionsFile
+  
+      If - is used for extensionsFile doxygen will write to standard output.
+  
+  7) Use doxygen to compare the used configuration file with the template configuration file
+      C:\Program Files\doxygen\bin\doxygen.exe -x [configFile]
+  
+  8) Use doxygen to show a list of built-in emojis.
+      C:\Program Files\doxygen\bin\doxygen.exe -f emoji outputFileName
+  
+      If - is used for outputFileName doxygen will write to standard output.
+  
+  If -s is specified the comments of the configuration items in the config file will be omitted.
+  If configName is omitted 'Doxyfile' will be used as a default.
+  If - is used for configFile doxygen will write / read the configuration to /from standard output / input.
+  
+  -v print version string
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(238,5): error MSB8066: Custom build for 'E:\course_work\final_version\transport_services\build\CMakeFiles\3432daeed8edfb26ddbdf999a507cb25\docs.rule' exited with code 1.

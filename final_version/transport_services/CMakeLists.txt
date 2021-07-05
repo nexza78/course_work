@@ -8,55 +8,55 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# QtCreator supports the following variables for Android, which are identical to qmake Android variables.
-# Check https://doc.qt.io/qt/deployment-android.html for more information.
-# They need to be set before the find_package( ...) calls below.
+#find_package(Doxygen)
+#option(BUILD_DOCUMENTATION "Create and install documentation (requires Doxygen)" ${DOXYGEN_FOUND})
 
-#if(ANDROID)
-#    set(ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
-#    if (ANDROID_ABI STREQUAL "armeabi-v7a")
-#        set(ANDROID_EXTRA_LIBS
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so
-#            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
-#    endif()
+#if(DOXYGEN_FOUND)
+#
+#        set(DOXYGEN ${CMAKE_SOURCE_DIR}/doc/Doxyfile.in)
+#
+#    message("Doxygen build started")
+#
+#        add_custom_target(
+#                docs ALL
+#                COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN}
+#                COMMENT "Generating API documentation with Doxygen"
+#                VERBATIM
+#                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/doc
+#        )
+#
 #endif()
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql REQUIRED)
 
-set(PROJECT_SOURCES
-        main.cpp
-        login.cpp
-        login.h
-        login.ui
-        admin.cpp
-        admin.h
-        admin.ui
-        user.cpp
-        user.h
-        user.ui
-        signup.cpp
-        signup.h
-        signup.ui
-)
+add_subdirectory(src)
 
-if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(transport_services
-        ${PROJECT_SOURCES}
-    )
-else()
-    if(ANDROID)
-        add_library(transport_services SHARED
-            ${PROJECT_SOURCES}
-        )
-    else()
-        add_executable(transport_services
-            ${PROJECT_SOURCES}
-        )
-    endif()
-endif()
+get_property(QT_CORE_INCLUDE_DIRS TARGET Qt${QT_VERSION_MAJOR}::Core PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
+list(GET QT_CORE_INCLUDE_DIRS 0 QT_CORE_MAIN_INCLUDE_DIR)
+get_filename_component(QT_MAIN_DIR ${QT_CORE_MAIN_INCLUDE_DIR}/.. ABSOLUTE)
 
-target_link_libraries(transport_services PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Sql)
+
+install(FILES $<TARGET_FILE:Qt${QT_VERSION_MAJOR}::Widgets> DESTINATION .)
+
+install(FILES $<TARGET_FILE:Qt${QT_VERSION_MAJOR}::Sql> DESTINATION .)
+
+install(FILES $<TARGET_FILE:Qt${QT_VERSION_MAJOR}::Core> DESTINATION .)
+
+install(FILES $<TARGET_FILE:Qt${QT_VERSION_MAJOR}::Gui> DESTINATION .)
+
+install(DIRECTORY ${QT_MAIN_DIR}/plugins/sqldrivers/
+        DESTINATION ./plugins/sqldrivers USE_SOURCE_PERMISSIONS)
+
+install(DIRECTORY ${QT_MAIN_DIR}/plugins/platforms/
+               DESTINATION ./plugins/platforms USE_SOURCE_PERMISSIONS)
+
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/doc DESTINATION ${PROJECT_BINARY_DIR})
+
+install(TARGETS transport_services DESTINATION .)
+
+
+
