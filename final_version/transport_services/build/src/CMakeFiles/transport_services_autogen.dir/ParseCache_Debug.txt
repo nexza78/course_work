@@ -466,7 +466,7 @@ E:/course_work/final_version/transport_services/src/user.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qversiontagging.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qwaitcondition.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qwineventnotifier.h
- mdp:
+ mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qxmlstream.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtGui/qbrush.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtGui/qcolor.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtGui/qcursor.h
@@ -695,7 +695,7 @@ E:/course_work/final_version/transport_services/src/login.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qstandardpaths.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qstate.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qstatemachine.h
- mdp:
+ mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qstorageinfo.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qstring.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringalgorithms.h
  mdp:C:/Qt/5.15.2/mingw81_64/include/QtCore/qstringbuilder.h

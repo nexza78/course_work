@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #find_package(Doxygen)
 #option(BUILD_DOCUMENTATION "Create and install documentation (requires Doxygen)" ${DOXYGEN_FOUND})
-
+#
 #if(DOXYGEN_FOUND)
 #
 #        set(DOXYGEN ${CMAKE_SOURCE_DIR}/doc/Doxyfile.in)
@@ -35,6 +35,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets Sql REQUIRED)
 
 add_subdirectory(src)
 
+
 get_property(QT_CORE_INCLUDE_DIRS TARGET Qt${QT_VERSION_MAJOR}::Core PROPERTY INTERFACE_INCLUDE_DIRECTORIES)
 list(GET QT_CORE_INCLUDE_DIRS 0 QT_CORE_MAIN_INCLUDE_DIR)
 get_filename_component(QT_MAIN_DIR ${QT_CORE_MAIN_INCLUDE_DIR}/.. ABSOLUTE)
@@ -55,6 +56,7 @@ install(DIRECTORY ${QT_MAIN_DIR}/plugins/platforms/
                DESTINATION ./plugins/platforms USE_SOURCE_PERMISSIONS)
 
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/doc DESTINATION ${PROJECT_BINARY_DIR})
+
 
 install(TARGETS transport_services DESTINATION .)
 

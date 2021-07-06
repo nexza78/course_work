@@ -1,8 +1,6 @@
 #include "login.h"
 #include "./ui_login.h"
 
-
-
 Login::Login(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Login)
@@ -10,7 +8,12 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("E:/course_work/final_version/transport_services/sqlitedb.db");
+    //mydb.setDatabaseName("E:/course_work/final_version/transport_services/sqlitedb.db");
+    mydb.setDatabaseName("../db/sqlitedb.db");
+    QString dir = "sqlitedb.db";
+
+    //qDebug() << qApp->applicationDirPath();
+    mydb.setDatabaseName(dir);
     mydb.open();
 }
 

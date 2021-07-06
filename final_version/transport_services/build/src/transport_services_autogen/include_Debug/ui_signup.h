@@ -65,7 +65,7 @@ public:
             SignUp->setObjectName(QString::fromUtf8("SignUp"));
         SignUp->resize(541, 534);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("C:/Users/stan_/Downloads/123.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../logo/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         SignUp->setWindowIcon(icon);
         centralwidget = new QWidget(SignUp);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -264,6 +264,15 @@ public:
         statusbar = new QStatusBar(SignUp);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         SignUp->setStatusBar(statusbar);
+        QWidget::setTabOrder(lineE_surname, lineEdit_name);
+        QWidget::setTabOrder(lineEdit_name, lineEdit_middle_name);
+        QWidget::setTabOrder(lineEdit_middle_name, lineE_login);
+        QWidget::setTabOrder(lineE_login, lineE_passwd);
+        QWidget::setTabOrder(lineE_passwd, line_passwd_confirm);
+        QWidget::setTabOrder(line_passwd_confirm, lineEdit_phone_nmb);
+        QWidget::setTabOrder(lineEdit_phone_nmb, lineEdit_email);
+        QWidget::setTabOrder(lineEdit_email, pB_confirm_register);
+        QWidget::setTabOrder(pB_confirm_register, pB_cancel);
 
         retranslateUi(SignUp);
 

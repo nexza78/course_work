@@ -123,7 +123,7 @@ public:
             Admin->setObjectName(QString::fromUtf8("Admin"));
         Admin->resize(705, 494);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("C:/Users/stan_/Downloads/123.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../logo/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         Admin->setWindowIcon(icon);
         centralwidget = new QWidget(Admin);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -181,6 +181,7 @@ public:
 
         label_3 = new QLabel(tab);
         label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setEnabled(true);
         sizePolicy.setHeightForWidth(label_3->sizePolicy().hasHeightForWidth());
         label_3->setSizePolicy(sizePolicy);
         label_3->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
@@ -558,6 +559,33 @@ public:
         statusbar = new QStatusBar(Admin);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         Admin->setStatusBar(statusbar);
+        QWidget::setTabOrder(tabWidget, lineE_surname);
+        QWidget::setTabOrder(lineE_surname, lineEdit_name);
+        QWidget::setTabOrder(lineEdit_name, lineEdit_middle_name);
+        QWidget::setTabOrder(lineEdit_middle_name, lineE_passwd);
+        QWidget::setTabOrder(lineE_passwd, lineE_passwd_confirm);
+        QWidget::setTabOrder(lineE_passwd_confirm, pushButton_change_acc);
+        QWidget::setTabOrder(pushButton_change_acc, pB_save_info);
+        QWidget::setTabOrder(pB_save_info, tableView_cur_orders);
+        QWidget::setTabOrder(tableView_cur_orders, comboBox_ID);
+        QWidget::setTabOrder(comboBox_ID, spinBox_price);
+        QWidget::setTabOrder(spinBox_price, pushButton_set_price);
+        QWidget::setTabOrder(pushButton_set_price, comboBox_set_status);
+        QWidget::setTabOrder(comboBox_set_status, pushButton_set_status);
+        QWidget::setTabOrder(pushButton_set_status, dateEdit);
+        QWidget::setTabOrder(dateEdit, pushButton_set_date);
+        QWidget::setTabOrder(pushButton_set_date, pushButton_save_orders);
+        QWidget::setTabOrder(pushButton_save_orders, comboBox_product_type);
+        QWidget::setTabOrder(comboBox_product_type, comboBox_transport_type);
+        QWidget::setTabOrder(comboBox_transport_type, comboBox_route_number);
+        QWidget::setTabOrder(comboBox_route_number, pushButton_del_size);
+        QWidget::setTabOrder(pushButton_del_size, lineEdit_new_route);
+        QWidget::setTabOrder(lineEdit_new_route, spinBox_width);
+        QWidget::setTabOrder(spinBox_width, spinBox_height);
+        QWidget::setTabOrder(spinBox_height, spinBox_thickness);
+        QWidget::setTabOrder(spinBox_thickness, pushButton_add_size);
+        QWidget::setTabOrder(pushButton_add_size, pushButton_change_size);
+        QWidget::setTabOrder(pushButton_change_size, tableView_archive);
 
         retranslateUi(Admin);
 

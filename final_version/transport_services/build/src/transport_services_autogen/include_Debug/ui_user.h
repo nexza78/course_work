@@ -96,7 +96,7 @@ public:
             User->setObjectName(QString::fromUtf8("User"));
         User->resize(613, 554);
         QIcon icon;
-        icon.addFile(QString::fromUtf8("C:/Users/stan_/Downloads/123.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QString::fromUtf8("../logo/logo.png"), QSize(), QIcon::Normal, QIcon::Off);
         User->setWindowIcon(icon);
         centralwidget = new QWidget(User);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -404,10 +404,26 @@ public:
         statusbar = new QStatusBar(User);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
         User->setStatusBar(statusbar);
+        QWidget::setTabOrder(tabWidget, lineE_surname);
+        QWidget::setTabOrder(lineE_surname, lineEdit_name);
+        QWidget::setTabOrder(lineEdit_name, lineEdit_middle_name);
+        QWidget::setTabOrder(lineEdit_middle_name, lineE_passwd);
+        QWidget::setTabOrder(lineE_passwd, lineE_passwd_confirm);
+        QWidget::setTabOrder(lineE_passwd_confirm, lineEdit_phone);
+        QWidget::setTabOrder(lineEdit_phone, lineEdit_email);
+        QWidget::setTabOrder(lineEdit_email, pushButton_change_acc);
+        QWidget::setTabOrder(pushButton_change_acc, pB_save_info);
+        QWidget::setTabOrder(pB_save_info, tableView_cur_orders);
+        QWidget::setTabOrder(tableView_cur_orders, comboBox_type_product);
+        QWidget::setTabOrder(comboBox_type_product, comboBox_type_transport);
+        QWidget::setTabOrder(comboBox_type_transport, comboBox_route_number);
+        QWidget::setTabOrder(comboBox_route_number, spinBox_count);
+        QWidget::setTabOrder(spinBox_count, pB_save_new_order);
+        QWidget::setTabOrder(pB_save_new_order, tableView_archive);
 
         retranslateUi(User);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(User);
