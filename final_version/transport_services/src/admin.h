@@ -85,7 +85,7 @@ private:
     void insert_update_sizes(char chosen);
 
 signals:
-    ///@brief Возврат в окну входа
+    ///@brief Возврат к окну входа
     void login_window();
 };
 
