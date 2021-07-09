@@ -2,10 +2,8 @@
 #define LOGIN_H
 
 #include <QMainWindow>
-#include<QtSql>
-#include<QtDebug>
+#include <QtSql>
 #include <QMessageBox>
-#include<QStackedWidget>
 #include "signup.h"
 #include "admin.h"
 #include "user.h"
@@ -24,7 +22,7 @@ public:
      * @brief Конструктор
      * @param parent Указатель на экземпляр родительского класса
      */
-    Login(QWidget *parent = nullptr);
+    explicit Login(QWidget *parent = nullptr);
     ~Login();
 
 private slots:
@@ -35,10 +33,8 @@ private slots:
 
 private:
     Ui::Login *ui;
-    QSqlDatabase mydb;
     SignUp *sign_up;
     User *user;
     Admin *admin;
-    QStackedWidget *stackedWidget;
 };
 #endif // LOGIN_H

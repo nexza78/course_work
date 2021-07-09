@@ -2,10 +2,8 @@
 #define USER_H
 
 #include <QMainWindow>
-#include<QMessageBox>
-#include<QDebug>
-#include<QtSql>
-#include<QStackedWidget>
+#include <QtSql>
+#include <QMessageBox>
 
 namespace Ui {
 class User;
@@ -17,6 +15,11 @@ class User : public QMainWindow
     Q_OBJECT
 
 public:
+    /**
+    * @brief Конструктор
+    * @param login Логин пользователя
+    * @param parent Указатель на экземпляр родительского класса
+    */
     User(QString login, QWidget *parent = nullptr);
     ~User();
 
@@ -37,13 +40,11 @@ private:
     /**
      * @brief Отображение текущих или архивных заказов в таблицах
      *
-     * @param orders_tables
-     *
      * @param table_type Выбор типа таблицы.
      *          Равен "cur_orders" для текущих заказов.
-     *          Равен "archive" для архивных заказов
+     *          Равен любому другой строке для архивных заказов
      */
-    void show_orders(QSqlQueryModel *orders_tables, QString table_type);
+    void show_orders(QString table_type);
 
 signals:
     ///@brief Возврат в окну входа

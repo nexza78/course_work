@@ -2,9 +2,8 @@
 #define SIGNUP_H
 
 #include <QMainWindow>
-#include<QtSql>
-#include<QDebug>
-#include<QMessageBox>
+#include <QtSql>
+#include <QMessageBox>
 
 namespace Ui {
 class SignUp;
@@ -16,6 +15,10 @@ class SignUp : public QMainWindow
     Q_OBJECT
 
 public:
+    /**
+     * @brief Конструктор
+     * @param parent Указатель на экземпляр родительского класса
+     */
     explicit SignUp(QWidget *parent = nullptr);
     ~SignUp();
 

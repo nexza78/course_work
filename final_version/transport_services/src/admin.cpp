@@ -43,10 +43,8 @@ Admin::Admin(QString login, QWidget *parent) :
     update_cur_size();
     update_ID_orders();
 
-    archive_model = new QSqlQueryModel();
-    cur_orders_model = new QSqlQueryModel();
-    show_orders(archive_model, "archive");
-    show_orders(cur_orders_model, "cur_orders");
+    show_orders("archive");
+    show_orders("cur_orders");
 }
 
 void Admin::on_pB_save_info_clicked()
@@ -310,7 +308,8 @@ void Admin::update_items_combobox_route_number(){
     }
 }
 
-void Admin::show_orders(QSqlQueryModel *model, QString table_type){
+void Admin::show_orders(QString table_type){
+    QSqlQueryModel *model = new QSqlQueryModel();
     QSqlQuery query_orders;
     QString query_part = "select Orders.Id_order, Products.product_type, Products.type_transport, Products.route_number, Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, Orders.kolvo, Users.Last_Name, Users.First_name, Users.Middle_name, Users.Phone_number, Users.Email from Orders inner join Products on Products.ID_products = Orders.ID_products inner join Users on Users.login = Orders.login where Orders.status";
     if(table_type == "cur_orders"){
@@ -370,8 +369,8 @@ void Admin::on_pushButton_save_orders_clicked()
 
       query_add_size.exec();
 
-      show_orders(archive_model, "archive");
-      show_orders(cur_orders_model, "cur_orders");
+      show_orders("archive");
+      show_orders("cur_orders");
       update_ID_orders();
     }
 }
@@ -389,7 +388,7 @@ void Admin::on_pushButton_set_price_clicked()
 
     query_add_size.exec();
 
-    show_orders(cur_orders_model, "cur_orders");
+    show_orders("cur_orders");
 }
 
 void Admin::on_pushButton_set_status_clicked()
@@ -408,8 +407,8 @@ void Admin::on_pushButton_set_status_clicked()
 
       query_add_size.exec();
 
-      show_orders(archive_model, "archive");
-      show_orders(cur_orders_model, "cur_orders");
+      show_orders("archive");
+      show_orders("cur_orders");
       update_ID_orders();
     }
 
@@ -427,5 +426,5 @@ void Admin::on_pushButton_set_date_clicked()
     query_add_size.bindValue(":Id", Id_order);
 
     query_add_size.exec();
-    show_orders(cur_orders_model, "cur_orders");
+    show_orders("cur_orders");
 }

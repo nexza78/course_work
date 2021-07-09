@@ -22,11 +22,8 @@ User::User(QString login, QWidget *parent) :
     ui->lineEdit_phone->setText(query_saved_info.value(4).toString());
     ui->lineEdit_email->setText(query_saved_info.value(5).toString());
 
-    cur_orders_model = new QSqlQueryModel();
-    show_orders(cur_orders_model, "cur_orders");
-
-    QSqlQueryModel *archive_model = new QSqlQueryModel();
-    show_orders(archive_model, "archive_orders");
+    show_orders("cur_orders");
+    show_orders("archive_orders");
 
     QStringList types_product;
     types_product << "путь следования" << "объемный номер" << "расписание";
@@ -129,8 +126,8 @@ void User::on_pushButton_change_acc_clicked()
 }
 
 
-void User::show_orders(QSqlQueryModel *orders_tables, QString table_type){
-
+void User::show_orders(QString table_type){
+    QSqlQueryModel *orders_tables = new QSqlQueryModel();
     QSqlQuery query_orders;
     QString query_part = "select Products.product_type, Products.type_transport, Products.route_number, "
                              "Products.width, Products.height, Products.thickness, Orders.price, Orders.status, Orders.deadline, "
@@ -206,10 +203,10 @@ void User::on_pB_save_new_order_clicked()
 
       query_new_order.exec();
 
-      show_orders(cur_orders_model, "cur_orders");
+      show_orders("cur_orders");
     }
 }
 
 void User::update_order_tables(){
-    show_orders( cur_orders_model, "cur_orders");
+    show_orders("cur_orders");
 }

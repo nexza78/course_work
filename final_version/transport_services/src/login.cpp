@@ -8,12 +8,7 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    //mydb.setDatabaseName("E:/course_work/final_version/transport_services/sqlitedb.db");
-    mydb.setDatabaseName("../db/sqlitedb.db");
-    QString dir = "sqlitedb.db";
-
-    //qDebug() << qApp->applicationDirPath();
-    mydb.setDatabaseName(dir);
+    mydb.setDatabaseName("../../db/sqlitedb.db");
     mydb.open();
 }
 

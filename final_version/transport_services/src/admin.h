@@ -2,9 +2,8 @@
 #define ADMIN_H
 
 #include <QMainWindow>
-#include<QtSql>
-#include<QDebug>
-#include<QMessageBox>
+#include <QtSql>
+#include <QMessageBox>
 
 namespace Ui {
 class Admin;
@@ -18,7 +17,7 @@ class Admin : public QMainWindow
 public:
     /**
     * @brief Конструктор
-    * @param login логин пользователя
+    * @param login Логин пользователя
     * @param parent Указатель на экземпляр родительского класса
     */
     Admin(QString login, QWidget *parent = nullptr);
@@ -62,8 +61,6 @@ private:
     QString selected_prod_type = "";
     QString selected_tr_type = "";
     QString selected_route = "";
-    QSqlQueryModel *cur_orders_model = nullptr;
-    QSqlQueryModel *archive_model = nullptr;
 
     ///@brief Обновление маршрутов в комбинированном списке comboBox_route_number
     void update_items_combobox_route_number();
@@ -74,17 +71,15 @@ private:
     /**
      * @brief Отображение текущих или архивных заказов в таблицах
      *
-     * @param orders_tables
-     *
      * @param table_type Выбор типа таблицы
-     *          Равен "cur_orders" для текущих заказов
-     *          Равен "archive" для архивных заказов
+     *                   Равен "cur_orders" для текущих заказов.
+     *                   Равен любой другой строке для архивных заказов
      */
-    void show_orders(QSqlQueryModel *orders_tables, QString table_type);
+    void show_orders(QString table_type);
     /**
      * @brief Добавление или изменение размера по выбору
      * @param chosen Выбранное действие.
-     *               Равен 'a' для добавления размера
+     *               Равен 'a' для добавления размера.
      *               Равен любому другому значению для изменения размера
     */
     void insert_update_sizes(char chosen);

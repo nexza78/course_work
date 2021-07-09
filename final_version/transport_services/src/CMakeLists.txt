@@ -17,4 +17,5 @@ set(PROJECT_SOURCES
 
 add_executable(transport_services ${PROJECT_SOURCES})
 
+
 target_link_libraries(transport_services PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Gui Qt${QT_VERSION_MAJOR}::Sql)
