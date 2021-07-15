@@ -1,0 +1,10 @@
+﻿  Automatic MOC and UIC for target transport_services
+  Building Custom Rule E:/course_work/final_version/transport_services/src/CMakeLists.txt
+  mocs_compilation_Debug.cpp
+  main.cpp
+  login.cpp
+  admin.cpp
+  user.cpp
+  signup.cpp
+  Generating Code...
+  transport_services.vcxproj -> E:\course_work\final_version\transport_services\build\src\Debug\transport_services.exe
