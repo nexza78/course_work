@@ -16,16 +16,16 @@ find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
 
-        set(DOXYGEN ${CMAKE_SOURCE_DIR}/Doxyfile)
+        set(DOXYGEN ${CMAKE_SOURCE_DIR}/doc/Doxyfile)
 
     message("Doxygen build started")
 
-        add_custom_target(
+       add_custom_target(
                 docs ALL
                 COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN}
                 COMMENT "Generating API documentation with Doxygen"
                 VERBATIM
-                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/doc
         )
 
 endif()
@@ -53,6 +53,10 @@ install(DIRECTORY ${QT_MAIN_DIR}/plugins/platforms/
                 DESTINATION ./plugins/platforms USE_SOURCE_PERMISSIONS)
 
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/doc DESTINATION ${PROJECT_BINARY_DIR})
+
+install(FILES ${CMAKE_SOURCE_DIR}/db/sqlitedb.db DESTINATION .)
+
+install(FILES ${CMAKE_SOURCE_DIR}/logo/logo.png DESTINATION .)
 
 install(TARGETS transport_services DESTINATION .)
 

@@ -1,0 +1,93 @@
+\hypertarget{class_user}{}\doxysection{Класс User}
+\label{class_user}\index{User@{User}}
+
+
+Окно заказчика  
+
+
+
+
+{\ttfamily \#include $<$user.\+h$>$}
+
+
+
+Базовые классы\+:QMain\+Window.
+
+\doxysubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_a73b5a301f6d968104481cb0e410a5ab5}\label{class_user_a73b5a301f6d968104481cb0e410a5ab5}} 
+void \mbox{\hyperlink{class_user_a73b5a301f6d968104481cb0e410a5ab5}{login\+\_\+window}} ()
+\begin{DoxyCompactList}\small\item\em Возврат в окну входа \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_user_ae7399bc20b764a183f944fb59cbc85ae}{User}} (QString login, QWidget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Конструктор \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Закрытые слоты}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_user_afde05e993caf3dc556d6a56316e2548e}\label{class_user_afde05e993caf3dc556d6a56316e2548e}} 
+void \mbox{\hyperlink{class_user_afde05e993caf3dc556d6a56316e2548e}{on\+\_\+push\+Button\+\_\+change\+\_\+acc\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Смена аккаунта \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_ab72a4fed63f75d2e72df5f167a0ea209}\label{class_user_ab72a4fed63f75d2e72df5f167a0ea209}} 
+void \mbox{\hyperlink{class_user_ab72a4fed63f75d2e72df5f167a0ea209}{on\+\_\+p\+B\+\_\+save\+\_\+info\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Сохранение информации о пользователе \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_a9164c33f5720c1475d2f231bc298462c}\label{class_user_a9164c33f5720c1475d2f231bc298462c}} 
+void \mbox{\hyperlink{class_user_a9164c33f5720c1475d2f231bc298462c}{on\+\_\+p\+B\+\_\+save\+\_\+new\+\_\+order\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Сохранение нового заказа \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_user_a21cc18d1f8742aa0a335ad52d7dd5c49}\label{class_user_a21cc18d1f8742aa0a335ad52d7dd5c49}} 
+void \mbox{\hyperlink{class_user_a21cc18d1f8742aa0a335ad52d7dd5c49}{update\+\_\+order\+\_\+tables}} ()
+\begin{DoxyCompactList}\small\item\em Обновление таблицы текущих заказов \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_user_a7230ea3c78b00e9ee70849cf4749ac85}{show\+\_\+orders}} (QString table\+\_\+type)
+\begin{DoxyCompactList}\small\item\em Отображение текущих или архивных заказов в таблицах \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Окно заказчика 
+
+\doxysubsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_user_ae7399bc20b764a183f944fb59cbc85ae}\label{class_user_ae7399bc20b764a183f944fb59cbc85ae}} 
+\index{User@{User}!User@{User}}
+\index{User@{User}!User@{User}}
+\doxysubsubsection{\texorpdfstring{User()}{User()}}
+{\footnotesize\ttfamily User\+::\+User (\begin{DoxyParamCaption}\item[{QString}]{login,  }\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Конструктор 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em login} & Логин пользователя \\
+\hline
+{\em parent} & Указатель на экземпляр родительского класса \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{class_user_a7230ea3c78b00e9ee70849cf4749ac85}\label{class_user_a7230ea3c78b00e9ee70849cf4749ac85}} 
+\index{User@{User}!show\_orders@{show\_orders}}
+\index{show\_orders@{show\_orders}!User@{User}}
+\doxysubsubsection{\texorpdfstring{show\_orders()}{show\_orders()}}
+{\footnotesize\ttfamily void User\+::show\+\_\+orders (\begin{DoxyParamCaption}\item[{QString}]{table\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Отображение текущих или архивных заказов в таблицах 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em table\+\_\+type} & Выбор типа таблицы. Равен \char`\"{}cur\+\_\+orders\char`\"{} для текущих заказов. Равен любому другой строке для архивных заказов \\
+\hline
+\end{DoxyParams}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+E\+:/course\+\_\+work/final\+\_\+version/transport\+\_\+services/src/user.\+h\item 
+E\+:/course\+\_\+work/final\+\_\+version/transport\+\_\+services/src/user.\+cpp\end{DoxyCompactItemize}

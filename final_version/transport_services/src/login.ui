@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../logo/logo.png</normaloff>../../logo/logo.png</iconset>
+    <normaloff>./logo.png</normaloff>./logo.png</iconset>
   </property>
   <property name="animated">
    <bool>true</bool>

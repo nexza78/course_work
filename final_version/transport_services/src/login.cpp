@@ -8,7 +8,8 @@ Login::Login(QWidget *parent)
     ui->setupUi(this);
 
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
-    mydb.setDatabaseName("../../db/sqlitedb.db");
+
+    mydb.setDatabaseName("./sqlitedb.db");
     mydb.open();
 }
 
